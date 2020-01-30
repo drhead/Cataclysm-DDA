@@ -848,6 +848,8 @@ void uilist::query( bool loop, int timeout )
 
     show();
 
+    gsi::get().update_uilist(entries);
+
 #if defined(__ANDROID__)
     for( const auto &entry : entries ) {
         if( entry.hotkey > 0 && entry.enabled ) {

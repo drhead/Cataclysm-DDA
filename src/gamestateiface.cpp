@@ -163,6 +163,23 @@ bool gsi::update_choose_adjacent(std::vector<bool> points)
     return false;
 }
 
+bool gsi::update_uilist(std::vector<uilist_entry> entries)
+{
+#ifdef GSI
+    uilist_hotkeys.clear();
+    uilist_tcolor.clear();
+
+    for (int i = 0; i < entries.size(); i++)
+    {
+        uilist_hotkeys.push_back(inp_mngr.get_keyname(entries[i].hotkey, CATA_INPUT_KEYBOARD));
+        uilist_tcolor.push_back(get_all_colors().get_name(entries[i].text_color));
+    }
+    gsi_socket::get().sockout();
+    return true;
+#endif
+    return false;
+}
+
 void gsi::update_needs()
 {
     hunger_level = g->u.get_hunger_description().first;
@@ -416,6 +433,12 @@ void gsi::serialize(JsonOut &jsout) const
     jsout.member("selected_left", advinv_selected_left);
     jsout.member("selected_right", advinv_selected_right);
     jsout.end_object();
+    jsout.member("adjacents", adjacents);
+    jsout.member("uilist");
+    jsout.start_object();
+    jsout.member("uilist_hotkeys", uilist_hotkeys);
+    jsout.member("uilist_tcolor", uilist_tcolor);
+    jsout.end_object();
     jsout.end_object();
 
     jsout.end_object();
@@ -525,7 +548,6 @@ void gsi_socket::tryReceive()
             }
         }
     }
-    int error = WSAGetLastError();
 }
 
 void gsi_socket::processCommands()

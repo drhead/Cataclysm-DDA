@@ -17,6 +17,7 @@
 #include "character.h"
 #include "game.h"
 #include "input.h"
+#include "ui.h"
 
 #ifdef _WINDOWS
 #include <Windows.h>
@@ -109,8 +110,14 @@ public:
     int advinv_selected_right;
     int advinv_selected_pane;
 
+    // Update parameters for adjacent item selection highlights
     bool update_choose_adjacent(std::vector<bool> points);
     std::vector<bool> adjacents;
+
+    // Update parameters for ui list selections
+    bool update_uilist(std::vector<uilist_entry> entries);
+    std::vector<std::string> uilist_hotkeys;
+    std::vector<std::string> uilist_tcolor;
 
   /**
    * Output the current game state information in JSON format.
@@ -228,8 +235,8 @@ private:
  * The IPC framework as it exists currently has two components:
  *  - a TCP socket, running on port 3441, which is processed asynchronously and is for
  *    input of commands.
- *  - UDP sockets that are created upon request, and send a datagram with an HTTP POST
- *    request on a specified port with JSON data.
+ *  - a list of ports for which TCP sockets will be created asynchronously and recreated
+ *    as necessary when the socket closes unexpectedly, for outputting game state info.
  */
 class gsi_socket
 {
