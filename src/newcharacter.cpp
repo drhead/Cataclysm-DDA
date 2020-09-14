@@ -112,16 +112,16 @@ enum struct tab_direction {
     QUIT
 };
 
-tab_direction set_points( avatar &u, points_left &points );
-tab_direction set_stats( avatar &u, points_left &points );
-tab_direction set_traits( avatar &u, points_left &points );
-tab_direction set_scenario( avatar &u, points_left &points, tab_direction direction );
-tab_direction set_profession( avatar &u, points_left &points, tab_direction direction );
-tab_direction set_skills( avatar &u, points_left &points );
-tab_direction set_description( avatar &you, bool allow_reroll, points_left &points );
+static tab_direction set_points( avatar &u, points_left &points );
+static tab_direction set_stats( avatar &u, points_left &points );
+static tab_direction set_traits( avatar &u, points_left &points );
+static tab_direction set_scenario( avatar &u, points_left &points, tab_direction direction );
+static tab_direction set_profession( avatar &u, points_left &points, tab_direction direction );
+static tab_direction set_skills( avatar &u, points_left &points );
+static tab_direction set_description( avatar &you, bool allow_reroll, points_left &points );
 
 static cata::optional<std::string> query_for_template_name();
-void reset_scenario( avatar &u, const scenario *scen );
+static void reset_scenario( avatar &u, const scenario *scen );
 
 void Character::pick_name( bool bUseDefault )
 {
@@ -667,7 +667,7 @@ template <class Compare>
 void draw_sorting_indicator( const catacurses::window &w_sorting, const input_context &ctxt,
                              Compare sorter )
 {
-    const auto sort_order = sorter.sort_by_points ? _( "points" ) : _( "name" );
+    const char *const sort_order = sorter.sort_by_points ? _( "points" ) : _( "name" );
     const auto sort_text = string_format(
                                _( "<color_white>Sort by:</color> %1$s "
                                   "(Press <color_light_green>%2$s</color> to change sorting.)" ),
@@ -1317,7 +1317,7 @@ tab_direction set_traits( avatar &u, points_left &points )
     } while( true );
 }
 
-struct {
+static struct {
     bool sort_by_points = true;
     bool male = false;
     /** @related player */
@@ -1420,7 +1420,7 @@ tab_direction set_profession( avatar &u, points_left &points,
             }
             // Draw header.
             draw_points( w, points, netPointCost );
-            std::string prof_msg_temp;
+            const char *prof_msg_temp;
             if( negativeProf ) {
                 //~ 1s - profession name, 2d - current character points.
                 prof_msg_temp = ngettext( "Profession %1$s earns %2$d point",
@@ -1434,7 +1434,7 @@ tab_direction set_profession( avatar &u, points_left &points,
             }
 
             int pMsg_length = utf8_width( remove_color_tags( points.to_string() ) );
-            mvwprintz( w, point( pMsg_length + 9, 3 ), can_pick ? c_green : c_light_red, prof_msg_temp.c_str(),
+            mvwprintz( w, point( pMsg_length + 9, 3 ), can_pick ? c_green : c_light_red, prof_msg_temp,
                        sorted_profs[cur_id]->gender_appropriate_name( u.male ),
                        pointsForProf );
 
@@ -1599,14 +1599,14 @@ tab_direction set_profession( avatar &u, points_left &points,
 
             draw_sorting_indicator( w_sorting, ctxt, profession_sorter );
 
-            std::string g_switch_msg = u.male ?
+            const char *g_switch_msg = u.male ?
                                        //~ Gender switch message. 1s - change key name, 2s - profession name.
                                        _( "Press <color_light_green>%1$s</color> to switch "
                                           "to <color_magenta>%2$s</color> (<color_pink>female</color>)." ) :
                                        //~ Gender switch message. 1s - change key name, 2s - profession name.
                                        _( "Press <color_light_green>%1$s</color> to switch "
                                           "to <color_magenta>%2$s</color> (<color_light_cyan>male</color>)." );
-            fold_and_print( w_genderswap, point_zero, ( TERMX / 2 ), c_light_gray, g_switch_msg.c_str(),
+            fold_and_print( w_genderswap, point_zero, ( TERMX / 2 ), c_light_gray, g_switch_msg,
                             ctxt.get_desc( "CHANGE_GENDER" ),
                             sorted_profs[cur_id]->gender_appropriate_name( !u.male ) );
         }
@@ -1944,7 +1944,7 @@ tab_direction set_skills( avatar &u, points_left &points )
     } while( true );
 }
 
-struct {
+static struct {
     bool sort_by_points = true;
     bool male = false;
     bool cities_enabled = false;
@@ -2055,7 +2055,7 @@ tab_direction set_scenario( avatar &u, points_left &points,
             // Draw header.
             draw_points( w, points, netPointCost );
 
-            std::string scen_msg_temp;
+            const char *scen_msg_temp;
             if( negativeScen ) {
                 //~ 1s - scenario name, 2d - current character points.
                 scen_msg_temp = ngettext( "Scenario %1$s earns %2$d point",
@@ -2069,7 +2069,7 @@ tab_direction set_scenario( avatar &u, points_left &points,
             }
 
             int pMsg_length = utf8_width( remove_color_tags( points.to_string() ) );
-            mvwprintz( w, point( pMsg_length + 9, 3 ), can_pick ? c_green : c_light_red, scen_msg_temp.c_str(),
+            mvwprintz( w, point( pMsg_length + 9, 3 ), can_pick ? c_green : c_light_red, scen_msg_temp,
                        sorted_scens[cur_id]->gender_appropriate_name( u.male ),
                        pointsForScen );
 
