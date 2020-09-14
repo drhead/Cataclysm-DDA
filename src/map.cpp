@@ -17,6 +17,7 @@
 #include "ammo_effect.h"
 #include "avatar.h"
 #include "basecamp.h"
+#include "cached_options.h"
 #include "calendar.h"
 #include "cata_assert.h"
 #include "character.h"
@@ -564,11 +565,11 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint &dp, const tileray &fac
             const int coll_dmg = coll.imp;
             // Shock damage, if the target part is a rotor treat as an aimed hit.
             if( veh.part_info( coll.part ).rotor_diameter() > 0 ) {
-                veh.damage( coll.part, coll_dmg, DT_BASH, true );
+                veh.damage( coll.part, coll_dmg, damage_type::BASH, true );
             } else {
                 impulse += coll_dmg;
-                veh.damage( coll.part, coll_dmg, DT_BASH );
-                veh.damage_all( coll_dmg / 2, coll_dmg, DT_BASH, collision_point );
+                veh.damage( coll.part, coll_dmg, damage_type::BASH );
+                veh.damage_all( coll_dmg / 2, coll_dmg, damage_type::BASH, collision_point );
             }
         }
     } while( collision_attempts-- > 0 && coll_velocity != 0 &&
@@ -689,7 +690,7 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint &dp, const tileray &fac
     if( veh.is_towing() ) {
         veh.do_towing_move();
         if( veh.tow_data.get_towed()->tow_cable_too_far() ) {
-            add_msg( m_info, _( "A towing cable snaps off of the %s." ),
+            add_msg( m_info, _( "A towing cable snaps off of %s." ),
                      veh.tow_data.get_towed()->disp_name() );
             veh.tow_data.get_towed()->invalidate_towing( true );
         }
@@ -845,10 +846,10 @@ float map::vehicle_vehicle_collision( vehicle &veh, vehicle &veh2,
         }
 
         epicenter1 += veh.part( parm1 ).mount;
-        veh.damage( parm1, dmg1_part, DT_BASH );
+        veh.damage( parm1, dmg1_part, damage_type::BASH );
 
         epicenter2 += veh2.part( parm2 ).mount;
-        veh2.damage( parm2, dmg2_part, DT_BASH );
+        veh2.damage( parm2, dmg2_part, damage_type::BASH );
     }
 
     epicenter2.x /= coll_parts_cnt;
@@ -856,7 +857,7 @@ float map::vehicle_vehicle_collision( vehicle &veh, vehicle &veh2,
 
     if( dmg2_part > 100 ) {
         // Shake vehicle because of collision
-        veh2.damage_all( dmg2_part / 2, dmg2_part, DT_BASH, epicenter2 );
+        veh2.damage_all( dmg2_part / 2, dmg2_part, damage_type::BASH, epicenter2 );
     }
 
     if( dmg_veh1 > 800 ) {
@@ -1212,6 +1213,7 @@ bool map::displace_vehicle( vehicle &veh, const tripoint &dp, const bool adjust_
         dst_submap->vehicles.push_back( std::move( *src_submap_veh_it ) );
         src_submap->vehicles.erase( src_submap_veh_it );
         dst_submap->is_uniform = false;
+        invalidate_max_populated_zlev( dst.z );
     }
     if( need_update ) {
         g->update_map( player_character );
@@ -1389,6 +1391,7 @@ void map::furn_set( const tripoint &p, const furn_id &new_furniture )
     }
     if( old_t.transparent != new_t.transparent ) {
         set_transparency_cache_dirty( p.z );
+        set_seen_cache_dirty( p );
     }
 
     if( old_t.has_flag( TFLAG_INDOORS ) != new_t.has_flag( TFLAG_INDOORS ) ) {
@@ -1397,7 +1400,10 @@ void map::furn_set( const tripoint &p, const furn_id &new_furniture )
 
     if( old_t.has_flag( TFLAG_NO_FLOOR ) != new_t.has_flag( TFLAG_NO_FLOOR ) ) {
         set_floor_cache_dirty( p.z );
+        set_seen_cache_dirty( p );
     }
+    invalidate_max_populated_zlev( p.z );
+
     set_memory_seen_cache_dirty( p );
 
     // TODO: Limit to changes that affect move cost, traps and stairs
@@ -1640,7 +1646,7 @@ ter_id map::get_ter_transforms_into( const tripoint &p ) const
  */
 void map::examine( Character &p, const tripoint &pos )
 {
-    const auto furn_here = furn( pos ).obj();
+    const furn_t furn_here = furn( pos ).obj();
     if( furn_here.examine != iexamine::none ) {
         furn_here.examine( dynamic_cast<player &>( p ), pos );
     } else {
@@ -1695,6 +1701,7 @@ bool map::ter_set( const tripoint &p, const ter_id &new_terrain )
 
     if( old_t.transparent != new_t.transparent ) {
         set_transparency_cache_dirty( p.z );
+        set_seen_cache_dirty( p );
     }
 
     if( old_t.has_flag( TFLAG_INDOORS ) != new_t.has_flag( TFLAG_INDOORS ) ) {
@@ -1705,7 +1712,10 @@ bool map::ter_set( const tripoint &p, const ter_id &new_terrain )
         set_floor_cache_dirty( p.z );
         // It's a set, not a flag
         support_cache_dirty.insert( p );
+        set_seen_cache_dirty( p );
     }
+    invalidate_max_populated_zlev( p.z );
+
     set_memory_seen_cache_dirty( p );
 
     // TODO: Limit to changes that affect move cost, traps and stairs
@@ -2194,17 +2204,23 @@ void map::drop_furniture( const tripoint &p )
         player *pl = dynamic_cast<player *>( critter );
         monster *mon = dynamic_cast<monster *>( critter );
         if( pl != nullptr ) {
-            pl->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( DT_BASH, rng( dmg / 3, dmg ), 0,
+            pl->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_type::BASH, rng( dmg / 3,
+                             dmg ), 0,
                              0.5f ) );
-            pl->deal_damage( nullptr, bodypart_id( "head" ),  damage_instance( DT_BASH, rng( dmg / 3, dmg ), 0,
+            pl->deal_damage( nullptr, bodypart_id( "head" ),  damage_instance( damage_type::BASH, rng( dmg / 3,
+                             dmg ), 0,
                              0.5f ) );
-            pl->deal_damage( nullptr, bodypart_id( "leg_l" ), damage_instance( DT_BASH, rng( dmg / 2, dmg ), 0,
+            pl->deal_damage( nullptr, bodypart_id( "leg_l" ), damage_instance( damage_type::BASH, rng( dmg / 2,
+                             dmg ), 0,
                              0.4f ) );
-            pl->deal_damage( nullptr, bodypart_id( "leg_r" ), damage_instance( DT_BASH, rng( dmg / 2, dmg ), 0,
+            pl->deal_damage( nullptr, bodypart_id( "leg_r" ), damage_instance( damage_type::BASH, rng( dmg / 2,
+                             dmg ), 0,
                              0.4f ) );
-            pl->deal_damage( nullptr, bodypart_id( "arm_l" ), damage_instance( DT_BASH, rng( dmg / 2, dmg ), 0,
+            pl->deal_damage( nullptr, bodypart_id( "arm_l" ), damage_instance( damage_type::BASH, rng( dmg / 2,
+                             dmg ), 0,
                              0.4f ) );
-            pl->deal_damage( nullptr, bodypart_id( "arm_r" ), damage_instance( DT_BASH, rng( dmg / 2, dmg ), 0,
+            pl->deal_damage( nullptr, bodypart_id( "arm_r" ), damage_instance( damage_type::BASH, rng( dmg / 2,
+                             dmg ), 0,
                              0.4f ) );
         } else if( mon != nullptr ) {
             // TODO: Monster's armor and size - don't crush hulks with chairs
@@ -2677,7 +2693,7 @@ bool map::is_flammable( const tripoint &p )
         return true;
     }
 
-    if( get_field_intensity( p, fd_web ) > 0 ) {
+    if( get_field_intensity( p, field_type_id( "fd_web" ) ) > 0 ) {
         return true;
     }
 
@@ -2781,7 +2797,7 @@ bool map::has_adjacent_furniture_with( const tripoint &p,
 bool map::has_nearby_fire( const tripoint &p, int radius )
 {
     for( const tripoint &pt : points_in_radius( p, radius ) ) {
-        if( get_field( pt, fd_fire ) != nullptr ) {
+        if( get_field( pt, field_type_id( "fd_fire" ) ) != nullptr ) {
             return true;
         }
         if( has_flag_ter_or_furn( "USABLE_FIRE", p ) ) {
@@ -2845,9 +2861,11 @@ bool map::mop_spills( const tripoint &p )
     }
 
     field &fld = field_at( p );
-    for( const auto &f : fld ) {
-        if( f.second.get_field_type().obj().phase == phase_id::LIQUID ) {
-            retval |= fld.remove_field( f.first );
+    for( auto it = fld.begin(); it != fld.end(); ) {
+        if( it->second.get_field_type().obj().phase == phase_id::LIQUID ) {
+            retval |= fld.remove_field( ( *it++ ).first );
+        } else {
+            ++it;
         }
     }
 
@@ -3029,11 +3047,12 @@ void map::smash_items( const tripoint &p, const int power, const std::string &ca
                 item_was_damaged = true;
             }
         } else {
-            const field_type_id type_blood = i->is_corpse() ? i->get_mtype()->bloodType() : fd_null;
+            const field_type_id type_blood = i->is_corpse() ? i->get_mtype()->bloodType() :
+                                             field_type_id( "fd_null" );
             while( ( damage_chance > material_factor ||
                      x_in_y( damage_chance, material_factor ) ) &&
                    i->damage() < i->max_damage() ) {
-                i->inc_damage( DT_BASH );
+                i->inc_damage( damage_type::BASH );
                 add_splash( type_blood, p, 1, damage_chance );
                 damage_chance -= material_factor;
                 item_was_damaged = true;
@@ -3493,7 +3512,7 @@ void map::bash_vehicle( const tripoint &p, bash_params &params )
 {
     // Smash vehicle if present
     if( const optional_vpart_position vp = veh_at( p ) ) {
-        vp->vehicle().damage( vp->part_index(), params.strength, DT_BASH );
+        vp->vehicle().damage( vp->part_index(), params.strength, damage_type::BASH );
         if( !params.silent ) {
             sounds::sound( p, 18, sounds::sound_t::combat, _( "crash!" ), false,
                            "smash_success", "hit_vehicle" );
@@ -3565,19 +3584,19 @@ void map::crush( const tripoint &p )
             // TODO: Make this depend on the ceiling material
             const int dam = rng( 0, 40 );
             // Torso and head take the brunt of the blow
-            crushed_player->deal_damage( nullptr, bodypart_id( "head" ), damage_instance( DT_BASH,
+            crushed_player->deal_damage( nullptr, bodypart_id( "head" ), damage_instance( damage_type::BASH,
                                          dam * .25 ) );
-            crushed_player->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( DT_BASH,
+            crushed_player->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_type::BASH,
                                          dam * .45 ) );
             // Legs take the next most through transferred force
-            crushed_player->deal_damage( nullptr, bodypart_id( "leg_l" ), damage_instance( DT_BASH,
+            crushed_player->deal_damage( nullptr, bodypart_id( "leg_l" ), damage_instance( damage_type::BASH,
                                          dam * .10 ) );
-            crushed_player->deal_damage( nullptr, bodypart_id( "leg_r" ), damage_instance( DT_BASH,
+            crushed_player->deal_damage( nullptr, bodypart_id( "leg_r" ), damage_instance( damage_type::BASH,
                                          dam * .10 ) );
             // Arms take the least
-            crushed_player->deal_damage( nullptr, bodypart_id( "arm_l" ), damage_instance( DT_BASH,
+            crushed_player->deal_damage( nullptr, bodypart_id( "arm_l" ), damage_instance( damage_type::BASH,
                                          dam * .05 ) );
-            crushed_player->deal_damage( nullptr, bodypart_id( "arm_r" ), damage_instance( DT_BASH,
+            crushed_player->deal_damage( nullptr, bodypart_id( "arm_r" ), damage_instance( damage_type::BASH,
                                          dam * .05 ) );
 
             // Pin whoever got hit
@@ -3588,7 +3607,8 @@ void map::crush( const tripoint &p )
 
     if( monster *const monhit = g->critter_at<monster>( p ) ) {
         // 25 ~= 60 * .45 (torso)
-        monhit->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( DT_BASH, rng( 0, 25 ) ) );
+        monhit->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_type::BASH, rng( 0,
+                             25 ) ) );
 
         // Pin whoever got hit
         monhit->add_effect( effect_crushed, 1_turns, true );
@@ -3597,7 +3617,7 @@ void map::crush( const tripoint &p )
 
     if( const optional_vpart_position vp = veh_at( p ) ) {
         // Arbitrary number is better than collapsing house roof crushing APCs
-        vp->vehicle().damage( vp->part_index(), rng( 100, 1000 ), DT_BASH, false );
+        vp->vehicle().damage( vp->part_index(), rng( 100, 1000 ), damage_type::BASH, false );
     }
 }
 
@@ -3625,7 +3645,8 @@ void map::shoot( const tripoint &p, projectile &proj, const bool hit_items )
 
     const bool inc = ammo_effects.count( "INCENDIARY" );
     if( const optional_vpart_position vp = veh_at( p ) ) {
-        dam = vp->vehicle().damage( vp->part_index(), dam, inc ? DT_HEAT : DT_STAB, hit_items );
+        dam = vp->vehicle().damage( vp->part_index(), dam, inc ? damage_type::HEAT : damage_type::STAB,
+                                    hit_items );
     }
     const auto break_glass = []( const tripoint & p, int vol ) {
         sounds::sound( p, vol, sounds::sound_t::combat, _( "glass breaking!" ), false,
@@ -3762,7 +3783,7 @@ void map::shoot( const tripoint &p, projectile &proj, const bool hit_items )
             ter_set( p, t_dirt );
         }
         if( inc ) {
-            add_field( p, fd_fire, 1 );
+            add_field( p, field_type_id( "fd_fire" ), 1 );
         }
     } else if( terrain == t_gas_pump ) {
         if( hit_items || one_in( 3 ) ) {
@@ -3823,7 +3844,7 @@ void map::shoot( const tripoint &p, projectile &proj, const bool hit_items )
         for( const std::pair<const field_type_id, field_entry> &fd : fields_copy ) {
             if( fd.first->bash_info.str_min > 0 ) {
                 if( inc ) {
-                    add_field( p, fd_fire, fd.second.get_field_intensity() - 1 );
+                    add_field( p, field_type_id( "fd_fire" ), fd.second.get_field_intensity() - 1 );
                 } else if( dam > 5 + fd.second.get_field_intensity() * 5 &&
                            one_in( 5 - fd.second.get_field_intensity() ) ) {
                     dam -= rng( 1, 2 + fd.second.get_field_intensity() * 2 );
@@ -3908,7 +3929,7 @@ bool map::hit_with_fire( const tripoint &p )
 
     // non passable but flammable terrain, set it on fire
     if( has_flag( "FLAMMABLE", p ) || has_flag( "FLAMMABLE_ASH", p ) ) {
-        add_field( p, fd_fire, 3 );
+        add_field( p, field_type_id( "fd_fire" ), 3 );
     }
     return true;
 }
@@ -4445,7 +4466,7 @@ item &map::add_item( const tripoint &p, item new_item )
         return null_item_reference();
     }
 
-    if( new_item.has_flag( "ACT_IN_FIRE" ) && get_field( p, fd_fire ) != nullptr ) {
+    if( new_item.has_flag( "ACT_IN_FIRE" ) && get_field( p, field_type_id( "fd_fire" ) ) != nullptr ) {
         if( new_item.has_flag( "BOMB" ) && new_item.is_transformable() ) {
             //Convert a bomb item into its transformable version, e.g. incendiary grenade -> active incendiary grenade
             new_item.convert( dynamic_cast<const iuse_transform *>
@@ -4459,6 +4480,8 @@ item &map::add_item( const tripoint &p, item new_item )
     }
 
     current_submap->is_uniform = false;
+    invalidate_max_populated_zlev( p.z );
+
     current_submap->update_lum_add( l, new_item );
 
     const map_stack::iterator new_pos = current_submap->get_items( l ).insert( new_item );
@@ -4820,7 +4843,7 @@ void map::process_items_in_vehicle( vehicle &cur_veh, submap &current_submap )
         // Find the cargo part and coordinates corresponding to the current active item.
         const vehicle_part &pt = it->part();
         const tripoint item_loc = it->pos();
-        auto items = cur_veh.get_items( static_cast<int>( it->part_index() ) );
+        vehicle_stack items = cur_veh.get_items( static_cast<int>( it->part_index() ) );
         float it_insulation = 1.0f;
         temperature_flag flag = temperature_flag::NORMAL;
         if( target.has_temperature() || target.is_food_container() ) {
@@ -5525,15 +5548,12 @@ bool map::add_field( const tripoint &p, const field_type_id &type, int intensity
         return false;
     }
 
-    if( intensity == INT_MAX ) {
-        intensity = type.obj().get_max_intensity();
-    }
-    intensity = std::min( intensity, type.obj().get_max_intensity() );
-    if( intensity <= 0 ) {
+    if( !type ) {
         return false;
     }
 
-    if( !type.id() ) {
+    intensity = std::min( intensity, type.obj().get_max_intensity() );
+    if( intensity <= 0 ) {
         return false;
     }
 
@@ -5544,6 +5564,7 @@ bool map::add_field( const tripoint &p, const field_type_id &type, int intensity
         return false;
     }
     current_submap->is_uniform = false;
+    invalidate_max_populated_zlev( p.z );
 
     if( current_submap->get_field( l ).add_field( type, intensity, age ) ) {
         //Only adding it to the count if it doesn't exist.
@@ -5562,6 +5583,7 @@ bool map::add_field( const tripoint &p, const field_type_id &type, int intensity
     // Dirty the transparency cache now that field processing doesn't always do it
     // TODO: Make it skip transparent fields
     set_transparency_cache_dirty( p.z );
+    set_seen_cache_dirty( p );
 
     if( type.obj().is_dangerous() ) {
         set_pathfinding_cache_dirty( p.z );
@@ -5597,6 +5619,7 @@ void map::remove_field( const tripoint &p, const field_type_id &field_to_remove 
         const auto &fdata = field_to_remove.obj();
         if( !fdata.is_transparent() ) {
             set_transparency_cache_dirty( p.z );
+            set_seen_cache_dirty( p );
         }
         if( fdata.is_dangerous() ) {
             set_pathfinding_cache_dirty( p.z );
@@ -5739,6 +5762,11 @@ void map::update_visibility_cache( const int zlev )
     visibility_variables_cache.u_clairvoyance = player_character.clairvoyance();
     visibility_variables_cache.u_sight_impaired = player_character.sight_impaired();
     visibility_variables_cache.u_is_boomered = player_character.has_effect( effect_boomered );
+    visibility_variables_cache.clairvoyance_field.reset();
+    const field_type_str_id fd_clairvoyant( "fd_clairvoyant" );
+    if( fd_clairvoyant.is_valid() ) {
+        visibility_variables_cache.clairvoyance_field = fd_clairvoyant;
+    }
 
     int sm_squares_seen[MAPSIZE][MAPSIZE];
     std::memset( sm_squares_seen, 0, sizeof( sm_squares_seen ) );
@@ -5761,7 +5789,7 @@ void map::update_visibility_cache( const int zlev )
         for( int gridy = 0; gridy < my_MAPSIZE; gridy++ ) {
             if( sm_squares_seen[gridx][gridy] > 36 ) { // 25% of the submap is visible
                 const tripoint sm( gridx, gridy, 0 );
-                const auto abs_sm = map::abs_sub + sm;
+                const tripoint abs_sm = map::abs_sub + sm;
                 // TODO: fix point types
                 const tripoint_abs_omt abs_omt( sm_to_omt_copy( abs_sm ) );
                 overmap_buffer.set_seen( abs_omt, true );
@@ -6371,7 +6399,7 @@ int map::obstacle_coverage( const tripoint &loc1, const tripoint &loc2 ) const
     if( const auto obstacle_f = furn( obstaclepos ) ) {
         return obstacle_f->coverage;
     }
-    if( const auto vp = veh_at( obstaclepos ) ) {
+    if( const optional_vpart_position vp = veh_at( obstaclepos ) ) {
         if( vp->obstacle_at_part() ) {
             return 60;
         } else if( !vp->part_with_feature( VPFLAG_AISLE, true ) ) {
@@ -6386,7 +6414,7 @@ int map::coverage( const tripoint &p ) const
     if( const auto obstacle_f = furn( p ) ) {
         return obstacle_f->coverage;
     }
-    if( const auto vp = veh_at( p ) ) {
+    if( const optional_vpart_position vp = veh_at( p ) ) {
         if( vp->obstacle_at_part() ) {
             return 60;
         } else if( !vp->part_with_feature( VPFLAG_AISLE, true ) ) {
@@ -6894,9 +6922,6 @@ void map::shift( const point &sp )
             support_cache_dirty.insert( pt + point( -sp.x * SEEX, -sp.y * SEEY ) );
         }
     }
-    if( zlevels ) {
-        calc_max_populated_zlev();
-    }
 }
 
 void map::vertical_shift( const int newz )
@@ -7027,6 +7052,7 @@ void map::loadn( const tripoint &grid, const bool update_vehicles, bool _actuali
 
     // New submap changes the content of the map and all caches must be recalculated
     set_transparency_cache_dirty( grid.z );
+    set_seen_cache_dirty( tripoint_zero );
     set_outside_cache_dirty( grid.z );
     set_floor_cache_dirty( grid.z );
     set_pathfinding_cache_dirty( grid.z );
@@ -8136,8 +8162,9 @@ void map::build_map_cache( const int zlev, bool skip_lightmap )
     bool seen_cache_dirty = false;
     for( int z = minz; z <= maxz; z++ ) {
         build_outside_cache( z );
-        seen_cache_dirty |= build_transparency_cache( z );
+        build_transparency_cache( z );
         seen_cache_dirty |= build_floor_cache( z );
+        seen_cache_dirty |= get_cache( z ).seen_cache_dirty;
         do_vehicle_caching( z );
     }
     seen_cache_dirty |= build_vision_transparency_cache( zlev );
@@ -8262,6 +8289,7 @@ void map::draw_fill_background( const ter_id &type )
 {
     // Need to explicitly set caches dirty - set_ter would do it before
     set_transparency_cache_dirty( abs_sub.z );
+    set_seen_cache_dirty( tripoint_zero );
     set_outside_cache_dirty( abs_sub.z );
     set_pathfinding_cache_dirty( abs_sub.z );
 
@@ -8397,10 +8425,15 @@ void map::maybe_trigger_trap( const tripoint &pos, Creature &c, const bool may_a
         return;
     }
 
+    //Don't trigger benign traps like cots and funnels
+    if( tr.is_benign() ) {
+        return;
+    }
+
     if( may_avoid && c.avoid_trap( pos, tr ) ) {
         player *const pl = c.as_player();
         if( !tr.is_always_invisible() && pl && !pl->knows_trap( pos ) ) {
-            pl->add_msg_if_player( _( "You've spotted a %1$ss!" ), tr.name() );
+            pl->add_msg_if_player( _( "You've spotted a %1$s!" ), tr.name() );
             pl->add_known_trap( pos, tr );
         }
         return;
@@ -8476,8 +8509,8 @@ void map::scent_blockers( std::array<std::array<bool, MAPSIZE_X>, MAPSIZE_Y> &bl
                           std::array<std::array<bool, MAPSIZE_X>, MAPSIZE_Y> &reduces_scent,
                           const point &min, const point &max )
 {
-    auto reduce = TFLAG_REDUCE_SCENT;
-    auto block = TFLAG_NO_SCENT;
+    ter_bitflags reduce = TFLAG_REDUCE_SCENT;
+    ter_bitflags block = TFLAG_NO_SCENT;
     auto fill_values = [&]( const tripoint & gp, const submap * sm, const point & lp ) {
         // We need to generate the x/y coordinates, because we can't get them "for free"
         const point p = lp + sm_to_ms_copy( gp.xy() );
@@ -8680,7 +8713,6 @@ level_cache::level_cache()
     std::fill_n( &visibility_cache[0][0], map_dimensions, lit_level::DARK );
     veh_in_active_range = false;
     std::fill_n( &veh_exists_at[0][0], map_dimensions, false );
-    max_populated_zlev = OVERMAP_HEIGHT;
 }
 
 pathfinding_cache::pathfinding_cache()
@@ -8858,8 +8890,13 @@ bool map::is_cornerfloor( const tripoint &p ) const
     return false;
 }
 
-void map::calc_max_populated_zlev()
+int map::calc_max_populated_zlev()
 {
+    // cache is filled and valid, skip recalculation
+    if( max_populated_zlev && max_populated_zlev->first == get_abs_sub() ) {
+        return max_populated_zlev->second;
+    }
+
     // We'll assume ground level is populated
     int max_z = 0;
 
@@ -8884,8 +8921,14 @@ void map::calc_max_populated_zlev()
             }
         }
     }
-    // This will be the same for every zlevel in the cache, so just put it in all of them
-    for( int z = -OVERMAP_DEPTH; z <= OVERMAP_HEIGHT; z++ ) {
-        get_cache( z ).max_populated_zlev = max_z;
+
+    max_populated_zlev = std::pair<tripoint, int>( get_abs_sub(), max_z );
+    return max_z;
+}
+
+void map::invalidate_max_populated_zlev( int zlev )
+{
+    if( max_populated_zlev && max_populated_zlev->second < zlev ) {
+        max_populated_zlev->second = zlev;
     }
 }

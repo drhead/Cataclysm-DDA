@@ -18,6 +18,7 @@
 #include <type_traits>
 #include <vector>
 
+#include "cached_options.h"
 #include "cata_utility.h"
 #include "catacharset.h"
 #include "color.h"
@@ -61,10 +62,6 @@ int OVERMAP_LEGEND_WIDTH;
 static std::string rm_prefix( std::string str, char c1 = '<', char c2 = '>' );
 
 scrollingcombattext SCT;
-extern bool tile_iso;
-extern bool use_tiles;
-
-extern bool test_mode;
 
 // utf8 version
 std::vector<std::string> foldstring( const std::string &str, int width, const char split )
@@ -265,7 +262,7 @@ int print_scrollable( const catacurses::window &w, int begin_line, const std::st
     const size_t wwidth = getmaxx( w );
     const auto text_lines = foldstring( text, wwidth );
     size_t wheight = getmaxy( w );
-    const auto print_scroll_msg = text_lines.size() > wheight;
+    const bool print_scroll_msg = text_lines.size() > wheight;
     if( print_scroll_msg && !scroll_msg.empty() ) {
         // keep the last line free for a message to the player
         wheight--;

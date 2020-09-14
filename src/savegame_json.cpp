@@ -124,7 +124,6 @@ struct oter_type_t;
 
 static const efftype_id effect_riding( "riding" );
 
-static const itype_id itype_battery( "battery" );
 static const itype_id itype_rad_badge( "rad_badge" );
 static const itype_id itype_radio( "radio" );
 static const itype_id itype_radio_on( "radio_on" );
@@ -136,8 +135,6 @@ static const ter_str_id ter_t_pwr_sb_support_l( "t_pwr_sb_support_l" );
 static const ter_str_id ter_t_pwr_sb_switchgear_l( "t_pwr_sb_switchgear_l" );
 static const ter_str_id ter_t_pwr_sb_switchgear_s( "t_pwr_sb_switchgear_s" );
 static const ter_str_id ter_t_wreckage( "t_wreckage" );
-
-static const trap_str_id tr_brazier( "tr_brazier" );
 
 static const std::array<std::string, static_cast<size_t>( object_type::NUM_OBJECT_TYPES )>
 obj_type_name = { { "OBJECT_NONE", "OBJECT_ITEM", "OBJECT_ACTOR", "OBJECT_PLAYER",
@@ -210,7 +207,9 @@ void item_pocket::serialize( JsonOut &json ) const
     json.member( "pocket_type", data->type );
     json.member( "contents", contents );
     json.member( "_sealed", _sealed );
-    json.member( "favorite_settings", this->settings );
+    if( this->settings.priority() != 0 || !this->settings.is_null() ) {
+        json.member( "favorite_settings", this->settings );
+    }
     json.end_object();
 }
 
@@ -223,7 +222,11 @@ void item_pocket::deserialize( JsonIn &jsin )
     _saved_type = static_cast<item_pocket::pocket_type>( saved_type_int );
     data.read( "_sealed", _sealed );
     _saved_sealed = _sealed;
-    data.read( "favorite_settings", this->settings );
+    if( data.has_member( "favorite_settings" ) ) {
+        data.read( "favorite_settings", this->settings );
+    } else {
+        this->settings.clear();
+    }
 }
 
 void item_pocket::favorite_settings::serialize( JsonOut &json ) const
@@ -253,7 +256,7 @@ void pocket_data::deserialize( JsonIn &jsin )
     load( data );
 }
 
-void resealable_data::deserialize( JsonIn &jsin )
+void sealable_data::deserialize( JsonIn &jsin )
 {
     JsonObject data = jsin.get_object();
     load( data );
@@ -557,7 +560,6 @@ void Character::load( const JsonObject &data )
         }
     }
 
-
     //energy
     data.read( "stim", stim );
     data.read( "stamina", stamina );
@@ -598,7 +600,7 @@ void Character::load( const JsonObject &data )
             it = my_mutations.erase( it );
         }
     }
-    size_class = calculate_size( *this );
+    recalculate_size();
 
     data.read( "my_bionics", *my_bionics );
 
@@ -2240,7 +2242,6 @@ static void load_legacy_craft_data( io::JsonObjectOutputArchive &, T & )
 
 static std::set<itype_id> charge_removal_blacklist;
 
-void load_charge_removal_blacklist( const JsonObject &jo, const std::string &src );
 void load_charge_removal_blacklist( const JsonObject &jo, const std::string &/*src*/ )
 {
     jo.read( "list", charge_removal_blacklist );
@@ -2307,6 +2308,10 @@ void item::io( Archive &archive )
     archive.io( "specific_energy", specific_energy, -10 );
     archive.io( "temperature", temperature, 0 );
     archive.io( "recipe_charges", recipe_charges, 1 );
+    // Legacy: remove flag check/unset after 0.F
+    const std::string flag_ETHEREAL_ITEM( "ETHEREAL_ITEM" );
+    archive.io( "ethereal", ethereal, has_flag( flag_ETHEREAL_ITEM ) );
+    unset_flag( flag_ETHEREAL_ITEM );
     archive.template io<const itype>( "curammo", curammo, load_curammo,
     []( const itype & i ) {
         return i.get_id().str();
@@ -2567,7 +2572,6 @@ void vehicle_part::deserialize( JsonIn &jsin )
 
         { "hydrogen_tank", { "tank", "none" } }
     };
-
 
     auto dep = deprecated.find( pid.str() );
     if( dep != deprecated.end() ) {
@@ -3028,7 +3032,7 @@ void mission::deserialize( JsonIn &jsin )
     jo.read( "npc_id", npc_id );
     jo.read( "good_fac_id", good_fac_id );
     jo.read( "bad_fac_id", bad_fac_id );
-
+    jo.read( "player_id", player_id );
 }
 
 void mission::serialize( JsonOut &json ) const
