@@ -23,7 +23,6 @@
     "squeamish_penalty": 6,
     "base_hp": 60,
     "drench_capacity": 40,
-    "smash_message": "You smash the %s with a powerful shoulder-check.",
     "bionic_slots": 80
   },
   {
@@ -50,8 +49,6 @@
     "squeamish_penalty": 7,
     "base_hp": 60,
     "drench_capacity": 7,
-    "smash_message": "You smash the %s with a firm headbutt.",
-    "smash_efficiency": 0.25,
     "bionic_slots": 18
   },
   {
@@ -73,10 +70,8 @@
     "squeamish_penalty": 8,
     "base_hp": 60,
     "drench_capacity": 1,
-    "flags": [ "IGNORE_TEMP" ],
-    "smash_message": "You use your flippin' face to smash the %s.  EXTREME.",
-    "smash_efficiency": 0.25,
-    "bionic_slots": 4
+    "bionic_slots": 4,
+    "flags": [ "IGNORE_TEMP" ]
   },
   {
     "id": "mouth",
@@ -99,8 +94,6 @@
     "squeamish_penalty": 9,
     "base_hp": 60,
     "drench_capacity": 1,
-    "smash_message": "You use your flippin' face to smash the %s.  EXTREME.",
-    "smash_efficiency": 0.25,
     "bionic_slots": 4
   },
   {
@@ -130,7 +123,6 @@
     "is_limb": true,
     "base_hp": 60,
     "drench_capacity": 10,
-    "smash_message": "You elbow-smash the %s.",
     "bionic_slots": 20
   },
   {
@@ -159,7 +151,6 @@
     "is_limb": true,
     "base_hp": 60,
     "drench_capacity": 10,
-    "smash_message": "You elbow-smash the %s.",
     "bionic_slots": 20
   },
   {
@@ -186,7 +177,6 @@
     "squeamish_penalty": 3,
     "base_hp": 60,
     "drench_capacity": 3,
-    "smash_message": "You smash the %s with your fist.",
     "bionic_slots": 5
   },
   {
@@ -213,7 +203,6 @@
     "squeamish_penalty": 3,
     "base_hp": 60,
     "drench_capacity": 3,
-    "smash_message": "You smash the %s with your fist.",
     "bionic_slots": 5
   },
   {
@@ -243,7 +232,6 @@
     "is_limb": true,
     "base_hp": 60,
     "drench_capacity": 11,
-    "smash_message": "You bring your knee down on the %s, smashing it.",
     "bionic_slots": 30
   },
   {
@@ -273,7 +261,6 @@
     "is_limb": true,
     "base_hp": 60,
     "drench_capacity": 11,
-    "smash_message": "You bring your knee down on the %s, smashing it.",
     "bionic_slots": 30
   },
   {
@@ -300,7 +287,6 @@
     "squeamish_penalty": 3,
     "base_hp": 60,
     "drench_capacity": 3,
-    "smash_message": "You kick down the %s, smashing it.",
     "bionic_slots": 7
   },
   {
@@ -327,7 +313,6 @@
     "squeamish_penalty": 3,
     "base_hp": 60,
     "drench_capacity": 3,
-    "smash_message": "You kick down the %s, smashing it.",
     "bionic_slots": 7
   }
 ]

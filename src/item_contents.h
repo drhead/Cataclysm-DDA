@@ -122,12 +122,9 @@ class item_contents
 
         units::volume remaining_container_capacity() const;
         units::volume total_contained_volume() const;
-        units::volume get_contents_volume_with_tweaks( const std::map<const item *, int> &without ) const;
-        units::volume get_nested_content_volume_recursive( const std::map<const item *, int> &without )
-        const;
 
         // gets all pockets contained in this item
-        ret_val<std::vector<const item_pocket *>> get_all_contained_pockets() const;
+        ret_val<std::vector<item_pocket>> get_all_contained_pockets() const;
 
         // gets the number of charges of liquid that can fit into the rest of the space
         int remaining_capacity_for_liquid( const item &liquid ) const;
@@ -202,9 +199,7 @@ class item_contents
         // gets the first ammo in all magazine pockets
         // does not support multiple magazine pockets!
         const item &first_ammo() const;
-        // spills liquid and other contents from the container. contents may remain
-        // in the container if the player cancels spilling. removing liquid from
-        // a magazine requires unload logic.
+        // spills all liquid from the container. removing liquid from a magazine requires unload logic.
         void handle_liquid_or_spill( Character &guy, const item *avoid = nullptr );
         // returns true if any of the pockets will spill if placed into a pocket
         bool will_spill() const;
@@ -216,6 +211,7 @@ class item_contents
         const item &only_item() const;
         item *get_item_with( const std::function<bool( const item & )> &filter );
         void remove_items_if( const std::function<bool( item & )> &filter );
+        bool has_any_with( const std::function<bool( const item & )> &filter ) const;
 
         // whether the contents has a pocket with the associated type
         bool has_pocket_type( item_pocket::pocket_type pk_type ) const;

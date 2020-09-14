@@ -16,7 +16,6 @@
 #include "cursesdef.h"
 #include "input.h"
 #include "memory_fast.h"
-#include "optional.h"
 #include "pimpl.h"
 #include "point.h"
 #include "string_formatter.h"
@@ -60,9 +59,7 @@ struct uilist_entry {
     int retval;                 // return this int
     bool enabled;               // darken, and forbid scrolling if hilight_disabled is false
     bool force_color = false;   // Never darken this option
-    // cata::nullopt: automatically assign an unassigned hotkey
-    // input_event(): disable hotkey
-    cata::optional<input_event> hotkey;
+    int hotkey;                 // keycode from (int)getch(). -1: automagically pick first free character: 1-9 a-z A-Z
     std::string txt;            // what it says on the tin
     std::string desc;           // optional, possibly longer, description
     std::string ctxt;           // second column text
@@ -70,24 +67,33 @@ struct uilist_entry {
     nc_color text_color;
     mvwzstr extratxt;
 
-    // In the following constructors, int K only support letters (a-z, A-Z) and
-    // digits (0-9), MENU_AUTOASSIGN, and 0 or ' ' (disable hotkey). Other
-    // values may not work under keycode mode.
-    uilist_entry( const std::string &T );
-    uilist_entry( const std::string &T, const std::string &D );
-    uilist_entry( const std::string &T, int K );
-    uilist_entry( const std::string &T, const cata::optional<input_event> &K );
-    uilist_entry( int R, bool E, int K, const std::string &T );
-    uilist_entry( int R, bool E, const cata::optional<input_event> &K,
-                  const std::string &T );
-    uilist_entry( int R, bool E, int K, const std::string &T, const std::string &D );
-    uilist_entry( int R, bool E, int K, const std::string &T, const std::string &D,
-                  const std::string &C );
-    uilist_entry( int R, bool E, const cata::optional<input_event> &K,
-                  const std::string &T, const std::string &D,
-                  const std::string &C );
-    uilist_entry( int R, bool E, int K, const std::string &T,
-                  const nc_color &H, const nc_color &C );
+    //std::string filtertxt; // possibly useful
+    uilist_entry( std::string T ) : retval( -1 ), enabled( true ), hotkey( -1 ), txt( T ) {
+        text_color = c_red_red;
+    }
+    uilist_entry( std::string T, std::string D ) : retval( -1 ), enabled( true ), hotkey( -1 ),
+        txt( T ), desc( D ) {
+        text_color = c_red_red;
+    }
+    uilist_entry( std::string T, int K ) : retval( -1 ), enabled( true ), hotkey( K ), txt( T ) {
+        text_color = c_red_red;
+    }
+    uilist_entry( int R, bool E, int K, std::string T ) : retval( R ), enabled( E ), hotkey( K ),
+        txt( T ) {
+        text_color = c_red_red;
+    }
+    uilist_entry( int R, bool E, int K, std::string T, std::string D ) : retval( R ), enabled( E ),
+        hotkey( K ), txt( T ), desc( D ) {
+        text_color = c_red_red;
+    }
+    uilist_entry( int R, bool E, int K, std::string T, std::string D, std::string C ) : retval( R ),
+        enabled( E ),
+        hotkey( K ), txt( T ), desc( D ), ctxt( C ) {
+        text_color = c_red_red;
+    }
+    uilist_entry( int R, bool E, int K, std::string T, nc_color H, nc_color C ) : retval( R ),
+        enabled( E ), hotkey( K ), txt( T ),
+        hotkey_color( H ), text_color( C ) {}
     template<typename Enum, typename... Args,
              typename = std::enable_if_t<std::is_enum<Enum>::value>>
     uilist_entry( Enum e, Args && ... args ) :
@@ -193,6 +199,7 @@ class uilist // NOLINT(cata-xy)
         };
 
         uilist();
+        uilist( const std::string &hotkeys_override );
         // query() will be called at the end of these convenience constructors
         uilist( const std::string &msg, const std::vector<uilist_entry> &opts );
         uilist( const std::string &msg, const std::vector<std::string> &opts );
@@ -208,25 +215,19 @@ class uilist // NOLINT(cata-xy)
         bool scrollby( int scrollby );
         void query( bool loop = true, int timeout = -1 );
         void filterlist();
-        // In add_entry/add_entry_desc/add_entry_col, int k only support letters
-        // (a-z, A-Z) and digits (0-9), MENU_AUTOASSIGN, and 0 or ' ' (disable
-        // hotkey). Other values may not work under keycode mode.
         void addentry( const std::string &str );
         void addentry( int r, bool e, int k, const std::string &str );
-        void addentry( int r, bool e, const cata::optional<input_event> &k,
-                       const std::string &str );
+        // K is templated so it matches a `char` literal and a `int` value.
+        // Using a fixed type (either `char` or `int`) will lead to ambiguity with the
+        // other overload when called with the wrong type.
         template<typename K, typename ...Args>
-        void addentry( const int r, const bool e, K &&k, const char *const format, Args &&... args ) {
-            return addentry( r, e, std::forward<K>( k ),
-                             string_format( format, std::forward<Args>( args )... ) );
+        void addentry( const int r, const bool e, K k, const char *const format, Args &&... args ) {
+            return addentry( r, e, k, string_format( format, std::forward<Args>( args )... ) );
         }
         void addentry_desc( const std::string &str, const std::string &desc );
         void addentry_desc( int r, bool e, int k, const std::string &str, const std::string &desc );
         void addentry_col( int r, bool e, int k, const std::string &str, const std::string &column,
                            const std::string &desc = "" );
-        void addentry_col( int r, bool e, const cata::optional<input_event> &k,
-                           const std::string &str, const std::string &column,
-                           const std::string &desc = std::string() );
         void settext( const std::string &str );
 
         void reset();
@@ -303,6 +304,9 @@ class uilist // NOLINT(cata-xy)
         bool allow_additional = false;
         bool hilight_disabled = false;
 
+    private:
+        std::string hotkeys;
+
     public:
         // Iternal states
         // TODO make private
@@ -323,8 +327,7 @@ class uilist // NOLINT(cata-xy)
 
     private:
         std::vector<int> fentries;
-        std::map<input_event, int, std::function<bool( const input_event &, const input_event & )>>
-        keymap { input_event::compare_type_mod_code };
+        std::map<int, int> keymap;
 
         weak_ptr_fast<ui_adaptor> ui;
 
@@ -346,8 +349,8 @@ class uilist // NOLINT(cata-xy)
         // Results
         // TODO change to getters
         std::string ret_act;
-        input_event ret_evt;
         int ret = 0;
+        int keypress = 0;
         int selected = 0;
 };
 

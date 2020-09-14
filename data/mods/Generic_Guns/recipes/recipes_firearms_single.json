@@ -4,7 +4,6 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "type": "recipe",
-    "activity_level": "fake",
     "skill_used": "mechanics",
     "difficulty": 2,
     "time": "12 m",
@@ -27,7 +26,6 @@
   {
     "result": "pistol_magnum_pipe",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "skill_used": "mechanics",
@@ -60,7 +58,6 @@
   {
     "result": "shot_pipe_double",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "skill_used": "mechanics",
@@ -97,7 +94,6 @@
   {
     "result": "black_powder_pistol",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "difficulty": 4,
@@ -114,7 +110,6 @@
   {
     "result": "black_powder_rifle",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "difficulty": 5,
@@ -130,7 +125,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -173,7 +167,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun",
     "id_suffix": "without_welding",
     "category": "CC_WEAPON",
@@ -215,7 +208,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun_d",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -258,7 +250,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun_d",
     "id_suffix": "welded_and_bolted",
     "category": "CC_WEAPON",
@@ -303,7 +294,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun_d",
     "id_suffix": "welded_together",
     "category": "CC_WEAPON",
@@ -318,7 +308,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun_d",
     "id_suffix": "taped_together",
     "category": "CC_WEAPON",

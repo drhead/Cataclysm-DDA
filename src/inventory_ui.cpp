@@ -79,7 +79,7 @@ struct navigation_mode_data {
 
 struct inventory_input {
     std::string action;
-    int ch = 0;
+    int ch;
     inventory_entry *entry;
 };
 
@@ -197,7 +197,7 @@ const item_category *inventory_entry::get_category_ptr() const
     if( !is_item() ) {
         return nullptr;
     }
-    return &any_item()->get_category_of_contents();
+    return &any_item()->get_category();
 }
 
 bool inventory_column::activatable() const
@@ -1264,7 +1264,7 @@ void inventory_selector::add_items( inventory_column &target_column,
         item_location const &loc = locations.front();
 
         if( custom_category == nullptr ) {
-            nat_category = &loc->get_category_of_contents();
+            nat_category = &loc->get_category();
         } else if( nat_category == nullptr && preset.is_shown( loc ) ) {
             nat_category = naturalize_category( *custom_category, loc.position() );
         }
@@ -1351,7 +1351,7 @@ void inventory_selector::add_vehicle_items( const tripoint &target )
     const std::string name = to_upper_case( remove_color_tags( veh->part( part ).name() ) );
     const item_category vehicle_cat( name, no_translation( name ), 200 );
 
-    const bool check_components = this->preset.get_checking_components();
+    const auto check_components = this->preset.get_checking_components();
 
     add_items( map_column, [ veh, part ]( item * it ) {
         return item_location( vehicle_cursor( *veh, part ), it );
@@ -1428,7 +1428,7 @@ inventory_entry *inventory_selector::find_entry_by_invlet( int invlet ) const
     return nullptr;
 }
 
-inventory_entry *inventory_selector::find_entry_by_coordinate( const point &coordinate ) const
+inventory_entry *inventory_selector::find_entry_by_coordinate( const point coordinate ) const
 {
     for( auto pair : rect_entry_map ) {
         if( pair.first.contains( coordinate ) ) {
@@ -2094,7 +2094,14 @@ const navigation_mode_data &inventory_selector::get_navigation_data( navigation_
 
 std::string inventory_selector::action_bound_to_key( char key ) const
 {
-    return ctxt.input_to_action( input_event( key, input_event_t::keyboard_char ) );
+    for( const std::string &action_descriptor : ctxt.get_registered_actions_copy() ) {
+        for( char bound_key : ctxt.keys_bound_to( action_descriptor ) ) {
+            if( key == bound_key ) {
+                return action_descriptor;
+            }
+        }
+    }
+    return std::string();
 }
 
 item_location inventory_pick_selector::execute()
@@ -2532,23 +2539,13 @@ void inventory_drop_selector::set_chosen_count( inventory_entry &entry, size_t c
     } else {
         entry.chosen_count = std::min( std::min( count, max_chosen_count ), entry.get_available_count() );
         if( it->count_by_charges() ) {
-            auto iter = find_if( dropping.begin(), dropping.end(), [&it]( drop_location drop ) {
-                return drop.first == it;
-            } );
-            if( iter == dropping.end() ) {
-                dropping.emplace_back( it, static_cast<int>( entry.chosen_count ) );
-            }
+            dropping.emplace_back( it, static_cast<int>( entry.chosen_count ) );
         } else {
             for( const item_location &loc : entry.locations ) {
                 if( count == 0 ) {
                     break;
                 }
-                auto iter = find_if( dropping.begin(), dropping.end(), [&loc]( drop_location drop ) {
-                    return drop.first == loc;
-                } );
-                if( iter == dropping.end() ) {
-                    dropping.emplace_back( loc, 1 );
-                }
+                dropping.emplace_back( loc, 1 );
                 count--;
             }
         }

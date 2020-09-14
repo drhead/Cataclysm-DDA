@@ -63,16 +63,13 @@ check: $(TEST_TARGET)
 clean:
 	rm -rf *obj *objwin
 	rm -f *cata_test
-	rm -f pch/*pch.hpp.gch
-	rm -f pch/*pch.hpp.pch
-	rm -f pch/*pch.hpp.d
+	rm -f pch/*pch.hpp.{gch,pch,d}
 
 #Unconditionally create object directory on invocation.
 $(shell mkdir -p $(ODIR))
 
 $(ODIR)/%.o: %.cpp $(PCH_P)
-	# Adding ../tests/ so that the directory appears in __FILE__ for log messages
-	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) $(subst main-pch,tests-pch,$(PCHFLAGS)) -c ../tests/$< -o $@
+	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) $(subst main-pch,tests-pch,$(PCHFLAGS)) -c $< -o $@
 
 .PHONY: clean check tests precompile_header
 

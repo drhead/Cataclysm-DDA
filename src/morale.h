@@ -197,7 +197,7 @@ class player_morale
             private:
                 mutation_handler on_gain;
                 mutation_handler on_loss;
-                bool active = false;
+                bool active;
         };
         std::map<trait_id, mutation_data> mutations;
 

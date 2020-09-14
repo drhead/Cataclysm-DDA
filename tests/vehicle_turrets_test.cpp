@@ -82,7 +82,7 @@ TEST_CASE( "vehicle_turret", "[vehicle] [gun] [magazine] [.]" )
                 REQUIRE( tank );
                 INFO( tank->get_id().str() );
 
-                int tank_idx = veh->install_part( point_zero, tank->get_id(), "", true );
+                auto tank_idx = veh->install_part( point_zero, tank->get_id(), "", true );
                 REQUIRE( tank_idx >= 0 );
                 REQUIRE( veh->part( tank_idx ).ammo_set( ammo->default_ammotype() ) );
 
@@ -90,7 +90,7 @@ TEST_CASE( "vehicle_turret", "[vehicle] [gun] [magazine] [.]" )
                 veh->part( idx ).ammo_set( ammo->default_ammotype() );
             }
 
-            turret_data qry = veh->turret_query( veh->part( idx ) );
+            auto qry = veh->turret_query( veh->part( idx ) );
             REQUIRE( qry );
 
             REQUIRE( qry.query() == turret_data::status::ready );

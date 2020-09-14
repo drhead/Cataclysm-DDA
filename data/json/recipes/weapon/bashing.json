@@ -2,7 +2,6 @@
   {
     "result": "hollow_cane",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
     "skill_used": "fabrication",
@@ -15,7 +14,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "shillelagh",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
@@ -30,7 +28,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "shillelagh_weighted",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
@@ -45,7 +42,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "blackjack",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
@@ -60,7 +56,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "makeshift_sap",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",

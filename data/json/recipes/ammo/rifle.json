@@ -2,7 +2,6 @@
   {
     "result": "flintlock_ammo",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -20,7 +19,6 @@
   {
     "result": "flintlock_shot",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -38,7 +36,6 @@
   {
     "result": "reloaded_22_fmj",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -55,7 +52,6 @@
   {
     "result": "reloaded_22_lr",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -72,7 +68,6 @@
   {
     "result": "bp_22_fmj",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -89,7 +84,6 @@
   {
     "result": "bp_22_lr",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -106,7 +100,6 @@
   {
     "result": "reloaded_223",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -128,7 +121,6 @@
   {
     "result": "bp_223",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -145,7 +137,6 @@
   {
     "result": "reloaded_270win_jsp",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -162,7 +153,6 @@
   {
     "result": "bp_270win_jsp",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -179,7 +169,6 @@
   {
     "result": "reloaded_300_winmag",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -201,7 +190,6 @@
   {
     "result": "bp_300_winmag",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -218,7 +206,6 @@
   {
     "result": "reloaded_3006",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -240,7 +227,6 @@
   {
     "result": "reloaded_3006fmj",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -262,7 +248,6 @@
   {
     "result": "reloaded_3006_incendiary",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -290,7 +275,6 @@
   {
     "result": "bp_3006",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -307,7 +291,6 @@
   {
     "result": "bp_3006fmj",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -324,7 +307,6 @@
   {
     "result": "bp_3006_incendiary",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -347,7 +329,6 @@
   {
     "result": "reloaded_308",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -374,7 +355,6 @@
   {
     "result": "bp_308",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -396,7 +376,6 @@
   {
     "result": "reloaded_4570_sp",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -419,7 +398,6 @@
   {
     "result": "reloaded_4570_pen",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -441,7 +419,6 @@
   {
     "result": "reloaded_4570_low",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -463,7 +440,6 @@
   {
     "result": "reloaded_4570_bp",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -480,7 +456,6 @@
   {
     "result": "reloaded_5x50dart",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -504,7 +479,6 @@
   {
     "result": "reloaded_50bmg",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -526,7 +500,6 @@
   {
     "result": "reloaded_50_incendiary",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -549,7 +522,6 @@
   {
     "result": "reloaded_50ss",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -572,7 +544,6 @@
   {
     "result": "reloaded_545",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -594,7 +565,6 @@
   {
     "result": "reloaded_545_ap",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -616,7 +586,6 @@
   {
     "result": "reloaded_300blk",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -633,7 +602,6 @@
   {
     "result": "bp_300blk",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -650,7 +618,6 @@
   {
     "result": "reloaded_556",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -677,7 +644,6 @@
   {
     "result": "reloaded_556_incendiary",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -700,7 +666,6 @@
   {
     "result": "bp_556",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -717,7 +682,6 @@
   {
     "result": "bp_556_incendiary",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -740,7 +704,6 @@
   {
     "result": "reloaded_700nx",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -762,7 +725,6 @@
   {
     "result": "reloaded_762_51",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -784,7 +746,6 @@
   {
     "result": "reloaded_762_51_incendiary",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -812,7 +773,6 @@
   {
     "result": "bp_762_51",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -834,7 +794,6 @@
   {
     "result": "bp_762_51_incendiary",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -857,7 +816,6 @@
   {
     "result": "reloaded_762_54R",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -884,7 +842,6 @@
   {
     "result": "reloaded_762_m43",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",
@@ -906,7 +863,6 @@
   {
     "result": "reloaded_762_m87",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_RIFLE",
     "skill_used": "fabrication",

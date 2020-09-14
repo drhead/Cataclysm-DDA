@@ -112,7 +112,7 @@ static bool is_sm_tile_outside( const tripoint &real_global_pos );
 static bool is_sm_tile_over_water( const tripoint &real_global_pos );
 
 // 1 kJ per battery charge
-static const int bat_energy_j = 1000;
+const int bat_energy_j = 1000;
 
 // For reference what each function is supposed to do, see their implementation in
 // @ref DefaultRemovePartHandler. Add compatible code for it into @ref MapgenRemovePartHandler,
@@ -141,9 +141,7 @@ class DefaultRemovePartHandler : public RemovePartHandler
             get_map().add_item_or_charges( loc, std::move( it ) );
         }
         void set_transparency_cache_dirty( const int z ) override {
-            map &here = get_map();
-            here.set_transparency_cache_dirty( z );
-            here.set_seen_cache_dirty( tripoint_zero );
+            get_map().set_transparency_cache_dirty( z );
         }
         void removed( vehicle &veh, const int part ) override {
             avatar &player_character = get_avatar();
@@ -1034,7 +1032,7 @@ void vehicle::smash( map &m, float hp_percent_loss_min, float hp_percent_loss_ma
         if( structures_found > 1 ) {
             //Destroy everything in the square
             for( int idx : parts_in_square ) {
-                mod_hp( parts[ idx ], 0 - parts[ idx ].hp(), damage_type::BASH );
+                mod_hp( parts[ idx ], 0 - parts[ idx ].hp(), DT_BASH );
                 parts[ idx ].ammo_unset();
             }
             continue;
@@ -1049,7 +1047,7 @@ void vehicle::smash( map &m, float hp_percent_loss_min, float hp_percent_loss_ma
             //Everywhere else, drop by 10-120% of max HP (anything over 100 = broken)
             if( mod_hp( part, 0 - ( rng_float( hp_percent_loss_min * dist,
                                                hp_percent_loss_max * dist ) *
-                                    part.info().durability ), damage_type::BASH ) ) {
+                                    part.info().durability ), DT_BASH ) ) {
                 part.ammo_unset();
             }
         }
@@ -1886,7 +1884,6 @@ bool vehicle::merge_rackable_vehicle( vehicle *carry_veh, const std::vector<int>
         here.destroy_vehicle( carry_veh );
         here.dirty_vehicle_list.insert( this );
         here.set_transparency_cache_dirty( sm_pos.z );
-        here.set_seen_cache_dirty( tripoint_zero );
         refresh();
     } else {
         //~ %1$s is the vehicle being loaded onto the bicycle rack
@@ -2437,7 +2434,6 @@ bool vehicle::split_vehicles( const std::vector<std::vector <int>> &new_vehs,
 
         here.dirty_vehicle_list.insert( new_vehicle );
         here.set_transparency_cache_dirty( sm_pos.z );
-        here.set_seen_cache_dirty( tripoint_zero );
         if( !new_labels.empty() ) {
             new_vehicle->labels = new_labels;
         }
@@ -3820,8 +3816,7 @@ void vehicle::noise_and_smoke( int load, time_duration time )
                 }
 
                 if( ( exhaust_part == -1 ) && engine_on ) {
-                    spew_field( j, p, field_type_id( "fd_smoke" ),
-                                bad_filter ? field_type_id( "fd_smoke" )->get_max_intensity() : 1 );
+                    spew_field( j, p, fd_smoke, bad_filter ? fd_smoke.obj().get_max_intensity() : 1 );
                 } else {
                     mufflesmoke += j;
                 }
@@ -3836,8 +3831,8 @@ void vehicle::noise_and_smoke( int load, time_duration time )
     /// TODO: handle other engine types: muscle / animal / wind / coal / ...
 
     if( exhaust_part != -1 && engine_on ) {
-        spew_field( mufflesmoke, exhaust_part, field_type_id( "fd_smoke" ),
-                    bad_filter ? field_type_id( "fd_smoke" )->get_max_intensity() : 1 );
+        spew_field( mufflesmoke, exhaust_part, fd_smoke,
+                    bad_filter ? fd_smoke.obj().get_max_intensity() : 1 );
     }
     if( is_rotorcraft() ) {
         noise *= 2;
@@ -6330,7 +6325,7 @@ int vehicle::damage( int p, int dmg, damage_type type, bool aimed )
         damage_dealt = damage_direct( target_part, dmg, type );
     } else {
         // Covered by armor -- hit both armor and part, but reduce damage by armor's reduction
-        int protection = part_info( armor_part ).damage_reduction[ static_cast<int>( type )];
+        int protection = part_info( armor_part ).damage_reduction[ type ];
         // Parts on roof aren't protected
         bool overhead = part_flag( target_part, "ROOF" ) || part_info( target_part ).location == "on_roof";
         // Calling damage_direct may remove the damaged part
@@ -6521,8 +6516,7 @@ bool vehicle::explode_fuel( int p, damage_type type )
         leak_fuel( parts[ p ] );
     }
 
-    int explosion_chance = type == damage_type::HEAT ? data.explosion_chance_hot :
-                           data.explosion_chance_cold;
+    int explosion_chance = type == DT_HEAT ? data.explosion_chance_hot : data.explosion_chance_cold;
     if( one_in( explosion_chance ) ) {
         get_event_bus().send<event_type::fuel_tank_explodes>( name );
         const int pow = 120 * ( 1 - std::exp( data.explosion_factor / -5000 *
@@ -6530,7 +6524,7 @@ bool vehicle::explode_fuel( int p, damage_type type )
         //debugmsg( "damage check dmg=%d pow=%d amount=%d", dmg, pow, parts[p].amount );
 
         explosion_handler::explosion( global_part_pos3( p ), pow, 0.7, data.fiery_explosion );
-        mod_hp( parts[p], 0 - parts[ p ].hp(), damage_type::HEAT );
+        mod_hp( parts[p], 0 - parts[ p ].hp(), DT_HEAT );
         parts[p].ammo_unset();
     }
 
@@ -6554,15 +6548,15 @@ int vehicle::damage_direct( int p, int dmg, damage_type type )
     }
 
     int tsh = std::min( 20, part_info( p ).durability / 10 );
-    if( dmg < tsh && type != damage_type::PURE ) {
-        if( type == damage_type::HEAT && parts[p].is_fuel_store() ) {
+    if( dmg < tsh && type != DT_TRUE ) {
+        if( type == DT_HEAT && parts[p].is_fuel_store() ) {
             explode_fuel( p, type );
         }
 
         return dmg;
     }
 
-    dmg -= std::min<int>( dmg, part_info( p ).damage_reduction[ static_cast<int>( type ) ] );
+    dmg -= std::min<int>( dmg, part_info( p ).damage_reduction[ type ] );
     int dres = dmg - parts[p].hp();
     if( mod_hp( parts[ p ], 0 - dmg, type ) ) {
         if( is_flyable() && has_part( "ROTOR" ) && !parts[p].has_flag( VPFLAG_SIMPLE_PART ) ) {

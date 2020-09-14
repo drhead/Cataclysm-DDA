@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 
-#include "achievement.h"
 #include "avatar.h"
 #include "bodypart.h"
 #include "character_id.h"
@@ -66,7 +65,6 @@ TEST_CASE( "memorials", "[memorial]" )
     m.clear();
     clear_avatar();
     get_stats().clear();
-    get_achievements().clear();
 
     event_bus &b = get_event_bus();
 
@@ -136,7 +134,7 @@ TEST_CASE( "memorials", "[memorial]" )
         m, b, "Opened the Marloss Gateway.", ch );
 
     check_memorial<event_type::crosses_mutation_threshold>(
-        m, b, "Became one with the bears.", ch, mutation_category_id( "URSINE" ) );
+        m, b, "Became one with the bears.", ch, "URSINE" );
 
     check_memorial<event_type::crosses_mycus_threshold>(
         m, b, "Became one with the Mycus.", ch );

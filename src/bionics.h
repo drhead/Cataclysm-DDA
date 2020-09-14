@@ -22,7 +22,6 @@
 #include "units_fwd.h"
 #include "value_ptr.h"
 
-class avatar;
 class Character;
 class JsonIn;
 class JsonObject;
@@ -215,7 +214,7 @@ std::vector<bodypart_id> get_occupied_bodyparts( const bionic_id &bid );
 
 void reset_bionics();
 
-char get_free_invlet( Character &p );
+char get_free_invlet( player &p );
 std::string list_occupied_bps( const bionic_id &bio_id, const std::string &intro,
                                bool each_bp_on_new_line = true );
 

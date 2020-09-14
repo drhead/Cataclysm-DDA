@@ -11,7 +11,6 @@
   {
     "result": "makeshift_kevlar",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_TORSO",
     "skill_used": "tailor",

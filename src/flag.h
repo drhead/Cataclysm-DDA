@@ -5,8 +5,6 @@
 #include <set>
 #include <string>
 
-#include "translations.h"
-
 class JsonObject;
 
 class json_flag
@@ -23,13 +21,8 @@ class json_flag
         }
 
         /** Get informative text for display in UI */
-        std::string info() const {
-            return info_.translated();
-        }
-
-        /** Get "restriction" phrase, saying what items with this flag must be able to do */
-        std::string restriction() const {
-            return restriction_.translated();
+        const std::string &info() const {
+            return info_;
         }
 
         /** Is flag inherited by base items from any attached items? */
@@ -59,8 +52,7 @@ class json_flag
 
     private:
         const std::string id_;
-        translation info_;
-        translation restriction_;
+        std::string info_;
         std::set<std::string> conflicts_;
         bool inherit_ = true;
         bool craft_inherit_ = false;

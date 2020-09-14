@@ -89,7 +89,7 @@ class talker
             return 0;
         }
         virtual int get_skill_level( const skill_id & ) const {
-            return 0;
+            return false;
         }
         virtual bool has_trait( const trait_id & ) const {
             return false;

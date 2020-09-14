@@ -16,7 +16,6 @@
 #include "avatar.h"
 #include "ballistics.h"
 #include "bodypart.h"
-#include "cached_options.h"
 #include "calendar.h"
 #include "cata_utility.h"
 #include "catacharset.h"
@@ -123,9 +122,9 @@ static const std::string flag_VEHICLE( "VEHICLE" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
 
 static projectile make_gun_projectile( const item &gun );
-static int time_to_attack( const Character &p, const itype &firing );
+int time_to_attack( const Character &p, const itype &firing );
 static void cycle_action( item &weap, const tripoint &pos );
-static void make_gun_sound_effect( const player &p, bool burst, item *weapon );
+void make_gun_sound_effect( const player &p, bool burst, item *weapon );
 
 class target_ui
 {
@@ -292,16 +291,7 @@ class target_ui
         void set_last_target();
 
         // Prompts player to confirm attack on neutral NPC
-        // Returns 'true' if attack should proceed
         bool confirm_non_enemy_target();
-
-        // Prompts player to re-confirm an ongoing attack if
-        // a non-hostile NPC / friendly creatures enters line of fire.
-        // Returns 'true' if attack should proceed
-        bool prompt_friendlies_in_lof();
-
-        // List friendly creatures currently occupying line of fire.
-        std::vector<weak_ptr_fast<Creature>> list_friendlies_in_lof();
 
         // Toggle snap-to-target
         void toggle_snap_to_target();
@@ -460,6 +450,12 @@ target_handler::trajectory target_handler::mode_spell( avatar &you, spell &casti
     ui.no_mana = no_mana;
 
     return ui.run();
+}
+
+target_handler::trajectory target_handler::mode_spell( avatar &you, const spell_id &sp,
+        bool no_fail, bool no_mana )
+{
+    return mode_spell( you, you.magic->get_spell( sp ), no_fail, no_mana );
 }
 
 static double occupied_tile_fraction( creature_size target_size )
@@ -710,7 +706,7 @@ void npc::pretend_fire( npc *source, int shots, item &gun )
         }
 
         item *weapon = &gun;
-        const item::sound_data data = weapon->gun_noise( shots > 1 );
+        const auto data = weapon->gun_noise( shots > 1 );
 
         add_msg_if_player_sees( *source, m_warning, _( "You hear %s." ), data.sound );
         curshot++;
@@ -787,8 +783,7 @@ int player::fire_gun( const tripoint &target, int shots, item &gun )
         const vehicle *in_veh = has_effect( effect_on_roof ) ? veh_pointer_or_null( here.veh_at(
                                     pos() ) ) : nullptr;
 
-        dealt_projectile_attack shot = projectile_attack( make_gun_projectile( gun ), pos(), aim,
-                                       dispersion, this, in_veh );
+        auto shot = projectile_attack( make_gun_projectile( gun ), pos(), aim, dispersion, this, in_veh );
         curshot++;
 
         int qty = gun.gun_recoil( *this, bipod );
@@ -827,15 +822,6 @@ int player::fire_gun( const tripoint &target, int shots, item &gun )
 
         if( shot.hit_critter ) {
             hits++;
-
-            if( monster *m = shot.hit_critter->as_monster() ) {
-                get_event_bus().send<event_type::character_ranged_attacks_monster>(
-                    getID(), gun.typeId(), m->type->id );
-            } else if( Character *c = shot.hit_critter->as_character() ) {
-                get_event_bus().send<event_type::character_ranged_attacks_character>(
-                    getID(), gun.typeId(), c->getID(), c->get_name() );
-            }
-
         }
 
         if( gun.gun_skill() == skill_launcher ) {
@@ -874,6 +860,9 @@ int player::fire_gun( const tripoint &target, int shots, item &gun )
     return curshot;
 }
 
+// TODO: Method
+// Silence warning about missing prototype.
+int throw_cost( const player &c, const item &to_throw );
 int throw_cost( const player &c, const item &to_throw )
 {
     // Very similar to player::attack_speed
@@ -1020,7 +1009,7 @@ dealt_projectile_attack player::throw_item( const tripoint &target, const item &
     stats_mod *= ( std::min( MAX_SKILL,
                              get_skill_level( skill_throw ) ) /
                    static_cast<double>( MAX_SKILL ) ) * 0.85 + 0.15;
-    impact.add_damage( damage_type::BASH, std::min( weight / 100.0_gram, stats_mod ) );
+    impact.add_damage( DT_BASH, std::min( weight / 100.0_gram, stats_mod ) );
 
     if( thrown.has_flag( "ACT_ON_RANGED_HIT" ) ) {
         proj_effects.insert( "ACT_ON_RANGED_HIT" );
@@ -1061,7 +1050,7 @@ dealt_projectile_attack player::throw_item( const tripoint &target, const item &
 
     // Deal extra cut damage if the item breaks
     if( shatter ) {
-        impact.add_damage( damage_type::CUT, units::to_milliliter( volume ) / 500.0f );
+        impact.add_damage( DT_CUT, units::to_milliliter( volume ) / 500.0f );
         proj_effects.insert( "SHATTER_SELF" );
     }
 
@@ -1105,8 +1094,7 @@ dealt_projectile_attack player::throw_item( const tripoint &target, const item &
     // This should generally have values below ~20*sqrt(skill_lvl)
     const float final_xp_mult = range_factor * damage_factor;
 
-    dealt_projectile_attack dealt_attack = projectile_attack( proj, throw_from, target, dispersion,
-                                           this );
+    auto dealt_attack = projectile_attack( proj, throw_from, target, dispersion, this );
 
     const double missed_by = dealt_attack.missed_by;
     if( missed_by <= 0.1 && dealt_attack.hit_critter != nullptr ) {
@@ -1247,6 +1235,7 @@ static int print_ranged_chance( const player &p, const catacurses::window &w, in
     }
 
     if( display_type != "numbers" ) {
+        std::string symbols;
         int column_number = 1;
         if( !( panel_type == "compact" || panel_type == "labels-narrow" ) ) {
             std::string label = _( "Symbols:" );
@@ -1281,8 +1270,8 @@ static int print_ranged_chance( const player &p, const catacurses::window &w, in
         }
     }
 
-    const auto front_or = [&]( const std::string & s, const input_event & fallback ) {
-        const std::vector<input_event> keys = ctxt.keys_bound_to( s, /*maximum_modifier_count=*/1 );
+    const auto front_or = [&]( const std::string & s, const char fallback ) {
+        const auto keys = ctxt.keys_bound_to( s );
         return keys.empty() ? fallback : keys.front();
     };
 
@@ -1307,7 +1296,7 @@ static int print_ranged_chance( const player &p, const catacurses::window &w, in
                             *ranged_weapon.type );
         }
 
-        const input_event hotkey = front_or( type.action.empty() ? "FIRE" : type.action, input_event() );
+        auto hotkey = front_or( type.action.empty() ? "FIRE" : type.action, ' ' );
         if( ( panel_type == "compact" || panel_type == "labels-narrow" ) ) {
             if( display_type == "numbers" ) {
                 t_aims[aim_iter] = string_format( "<color_dark_gray>%s:</color>", label );
@@ -1322,7 +1311,7 @@ static int print_ranged_chance( const player &p, const catacurses::window &w, in
             print_colored_text( w, point( 1, line_number++ ), col, col,
                                 string_format( _( "<color_white>[%s]</color> %s %s: Moves to fire: "
                                                   "<color_light_blue>%d</color>" ),
-                                               hotkey.short_description(), label, aim_l, moves_to_fire ) );
+                                               hotkey, label, aim_l, moves_to_fire ) );
         }
 
         double confidence = confidence_estimate( range, target_size, current_dispersion );
@@ -1580,13 +1569,11 @@ static void cycle_action( item &weap, const tripoint &pos )
         cargo = vp->vehicle().get_parts_at( pos, "CARGO", part_status_flag::any );
     }
 
-    item *brass_catcher = weap.gunmod_find_by_flag( "BRASS_CATCHER" );
     if( weap.ammo_data() && weap.ammo_data()->ammo->casing ) {
         const itype_id casing = *weap.ammo_data()->ammo->casing;
-        if( weap.has_flag( "RELOAD_EJECT" ) ) {
+        if( weap.has_flag( "RELOAD_EJECT" ) || weap.gunmod_find( itype_brass_catcher ) ) {
             weap.put_in( item( casing ).set_flag( "CASING" ), item_pocket::pocket_type::CONTAINER );
-        } else if( !( brass_catcher && brass_catcher->put_in( item( casing ),
-                      item_pocket::pocket_type::CONTAINER ).success() ) ) {
+        } else {
             if( cargo.empty() ) {
                 here.add_item_or_charges( eject, item( casing ) );
             } else {
@@ -1602,20 +1589,20 @@ static void cycle_action( item &weap, const tripoint &pos )
     const item *mag = weap.magazine_current();
     if( mag && mag->type->magazine->linkage ) {
         item linkage( *mag->type->magazine->linkage, calendar::turn, 1 );
-        if( !( brass_catcher &&
-               brass_catcher->put_in( linkage, item_pocket::pocket_type::CONTAINER ).success() ) ) {
-            if( cargo.empty() ) {
-                here.add_item_or_charges( eject, linkage );
-            } else {
-                vp->vehicle().add_item( *cargo.front(), linkage );
-            }
+        if( weap.gunmod_find( itype_brass_catcher ) ) {
+            linkage.set_flag( "CASING" );
+            weap.put_in( linkage, item_pocket::pocket_type::CONTAINER );
+        } else if( cargo.empty() ) {
+            here.add_item_or_charges( eject, linkage );
+        } else {
+            vp->vehicle().add_item( *cargo.front(), linkage );
         }
     }
 }
 
 void make_gun_sound_effect( const player &p, bool burst, item *weapon )
 {
-    const item::sound_data data = weapon->gun_noise( burst );
+    const auto data = weapon->gun_noise( burst );
     if( data.volume > 0 ) {
         sounds::sound( p.pos(), data.volume, sounds::sound_t::combat,
                        data.sound.empty() ? _( "Bang!" ) : data.sound );
@@ -1698,7 +1685,7 @@ item::sound_data item::gun_noise( const bool burst ) const
     return { 0, "" }; // silent weapons
 }
 
-static bool is_driving( const Character &p )
+static bool is_driving( const player &p )
 {
     const optional_vpart_position vp = get_map().veh_at( p.pos() );
     return vp && vp->vehicle().is_moving() && vp->vehicle().player_in_control( p );
@@ -1727,7 +1714,7 @@ static double dispersion_from_skill( double skill, double weapon_dispersion )
 }
 
 // utility functions for projectile_attack
-dispersion_sources Character::get_weapon_dispersion( const item &obj ) const
+dispersion_sources player::get_weapon_dispersion( const item &obj ) const
 {
     int weapon_dispersion = obj.gun_dispersion();
     dispersion_sources dispersion( weapon_dispersion );
@@ -1773,7 +1760,7 @@ dispersion_sources Character::get_weapon_dispersion( const item &obj ) const
     return dispersion;
 }
 
-double Character::gun_value( const item &weap, int ammo ) const
+double player::gun_value( const item &weap, int ammo ) const
 {
     // TODO: Mods
     // TODO: Allow using a specified type of ammo rather than default or current
@@ -1802,8 +1789,17 @@ double Character::gun_value( const item &weap, int ammo ) const
 
     damage_instance gun_damage = weap.gun_damage();
     item tmp = weap;
-    if( tmp.is_magazine() || tmp.magazine_current() || tmp.magazine_default() ) {
+    if( tmp.is_magazine() ) {
         tmp.ammo_set( ammo_type );
+    } else if( tmp.contents.has_pocket_type( item_pocket::pocket_type::MAGAZINE_WELL ) ) {
+        item mag;
+        if( weap.magazine_current() ) {
+            mag = item( *weap.magazine_current() );
+        } else {
+            mag = item( weap.magazine_default() );
+        }
+        mag.ammo_set( ammo_type );
+        tmp.put_in( mag, item_pocket::pocket_type::MAGAZINE_WELL );
     }
     int total_dispersion = get_weapon_dispersion( tmp ).max() +
                            effective_dispersion( tmp.sight_dispersion() );
@@ -1977,15 +1973,6 @@ target_handler::trajectory target_ui::run()
         attack_was_confirmed = false;
         you->last_target.reset();
     }
-    if( mode == TargetMode::Fire ) {
-        if( !activity->first_turn && !action.empty() && !prompt_friendlies_in_lof() ) {
-            // A friendly creature moved into line of fire during aim-and-shoot,
-            // and player decided to stop aiming
-            action.clear();
-            attack_was_confirmed = false;
-        }
-        activity->acceptable_losses.clear();
-    }
 
     // Event loop!
     ExitCode loop_exit_code;
@@ -2103,7 +2090,6 @@ target_handler::trajectory target_ui::run()
         }
         case ExitCode::Timeout: {
             // We've ran out of moves, save UI state
-            activity->acceptable_losses = list_friendlies_in_lof();
             traj.clear();
             activity->action = timed_out_action;
             activity->snap_to_target = snap_to_target;
@@ -2123,6 +2109,7 @@ target_handler::trajectory target_ui::run()
 
 void target_ui::init_window_and_input()
 {
+    std::string display_type = get_option<std::string>( "ACCURACY_DISPLAY" );
     std::string panel_type = panel_manager::get_manager().get_current_layout_id();
     narrow = ( panel_type == "compact" || panel_type == "labels-narrow" );
 
@@ -2154,8 +2141,11 @@ void target_ui::init_window_and_input()
 
     w_target = catacurses::newwin( height, width, point( TERMX - width, top ) );
 
-    ctxt = input_context( "TARGET" );
+    ctxt = input_context( "TARGET", keyboard_mode::keychar );
     ctxt.set_iso( true );
+    // "ANY_INPUT" should be added before any real help strings
+    // Or strings will be written on window border.
+    ctxt.register_action( "ANY_INPUT" );
     ctxt.register_directions();
     ctxt.register_action( "COORDINATE" );
     ctxt.register_action( "SELECT" );
@@ -2519,66 +2509,6 @@ bool target_ui::confirm_non_enemy_target()
     return true;
 }
 
-bool target_ui::prompt_friendlies_in_lof()
-{
-    if( mode != TargetMode::Fire ) {
-        debugmsg( "Not implemented" );
-        return true;
-    }
-
-    std::vector<weak_ptr_fast<Creature>> in_lof = list_friendlies_in_lof();
-    std::vector<Creature *> new_in_lof;
-    for( const weak_ptr_fast<Creature> &cr_ptr : in_lof ) {
-        bool found = false;
-        Creature *cr = cr_ptr.lock().get();
-        for( const weak_ptr_fast<Creature> &cr2_ptr : activity->acceptable_losses ) {
-            Creature *cr2 = cr2_ptr.lock().get();
-            if( cr == cr2 ) {
-                found = true;
-                break;
-            }
-        }
-        if( !found ) {
-            new_in_lof.push_back( cr );
-        }
-    }
-
-    if( new_in_lof.empty() ) {
-        return true;
-    }
-
-    std::string msg = _( "There are friendly creatures in line of fire:\n" );
-    for( Creature *cr : new_in_lof ) {
-        msg += "  " + cr->disp_name() + "\n";
-    }
-    msg += _( "Proceed with the attack?" );
-    return query_yn( msg );
-}
-
-std::vector<weak_ptr_fast<Creature>> target_ui::list_friendlies_in_lof()
-{
-    std::vector<weak_ptr_fast<Creature>> ret;
-    if( mode == TargetMode::Turrets || mode == TargetMode::Spell ) {
-        debugmsg( "Not implemented" );
-        return ret;
-    }
-    for( const tripoint &p : traj ) {
-        if( p != dst && p != src ) {
-            Creature *cr = g->critter_at( p, true );
-            if( cr && pl_can_target( cr ) ) {
-                Creature::Attitude a = cr->attitude_to( *this->you );
-                if(
-                    ( cr->is_npc() && a != Creature::Attitude::HOSTILE ) ||
-                    ( !cr->is_npc() && a == Creature::Attitude::FRIENDLY )
-                ) {
-                    ret.push_back( g->shared_from( *cr ) );
-                }
-            }
-        }
-    }
-    return ret;
-}
-
 void target_ui::toggle_snap_to_target()
 {
     shifting_view = false;
@@ -2937,9 +2867,7 @@ void target_ui::draw_help_notice()
 {
     int text_y = getmaxy( w_target ) - 1;
     int width = getmaxx( w_target );
-    const std::string label_help = string_format(
-                                       narrow ? _( "[%s] show help" ) : _( "[%s] show all controls" ),
-                                       ctxt.get_desc( "HELP_KEYBINDINGS", 1 ) );
+    const std::string label_help = narrow ? _( "[?] show help" ) : _( "[?] show all controls" );
     int label_width = std::min( utf8_width( label_help ), width - 6 ); // 6 for borders and "< " + " >"
     int text_x = width - label_width - 6;
     mvwprintz( w_target, point( text_x + 1, text_y ), c_white, "< " );
@@ -2958,8 +2886,8 @@ void target_ui::draw_controls_list( int text_y )
 
     // Get first key bound to given action OR ' ' if there are none.
     const auto bound_key = [this]( const std::string & s ) {
-        const std::vector<input_event> keys = this->ctxt.keys_bound_to( s, /*maximum_modifier_count=*/1 );
-        return keys.empty() ? input_event() : keys.front();
+        const std::vector<char> keys = this->ctxt.keys_bound_to( s );
+        return keys.empty() ? ' ' : keys.front();
     };
     const auto colored = [col_enabled]( nc_color color, const std::string & s ) {
         if( color == col_enabled ) {
@@ -2989,45 +2917,43 @@ void target_ui::draw_controls_list( int text_y )
     }
     {
         std::string cycle = string_format( _( "[%s] Cycle targets;" ), ctxt.get_desc( "NEXT_TARGET", 1 ) );
-        std::string fire = string_format( _( "[%s] %s." ), bound_key( "FIRE" ).short_description(),
-                                          uitext_fire() );
+        std::string fire = string_format( _( "[%c] %s." ), bound_key( "FIRE" ), uitext_fire() );
         lines.push_back( {0, colored( col_move, cycle ) + " " + colored( col_fire, fire )} );
     }
     {
-        std::string text = string_format( _( "[%s] target self; [%s] toggle snap-to-target" ),
-                                          bound_key( "CENTER" ).short_description(),
-                                          bound_key( "TOGGLE_SNAP_TO_TARGET" ).short_description() );
+        std::string text = string_format( _( "[%c] target self; [%c] toggle snap-to-target" ),
+                                          bound_key( "CENTER" ), bound_key( "TOGGLE_SNAP_TO_TARGET" ) );
         lines.push_back( {3, colored( col_enabled, text )} );
     }
     if( mode == TargetMode::Fire ) {
         std::string aim_and_fire;
         for( const auto &e : aim_types ) {
             if( e.has_threshold ) {
-                aim_and_fire += string_format( "[%s] ", bound_key( e.action ).short_description() );
+                aim_and_fire += string_format( "[%c] ", bound_key( e.action ) );
             }
         }
         aim_and_fire += _( "to aim and fire." );
 
-        std::string aim = string_format( _( "[%s] to steady your aim.  (10 moves)" ),
-                                         bound_key( "AIM" ).short_description() );
-        std::string sw_aim = string_format( _( "[%s] to switch aiming modes." ),
-                                            bound_key( "SWITCH_AIM" ).short_description() );
+        std::string aim = string_format( _( "[%c] to steady your aim.  (10 moves)" ),
+                                         bound_key( "AIM" ) );
+        std::string sw_aim = string_format( _( "[%c] to switch aiming modes." ),
+                                            bound_key( "SWITCH_AIM" ) );
 
         lines.push_back( {2, colored( col_fire, aim )} );
         lines.push_back( {1, colored( col_fire, sw_aim )} );
         lines.push_back( {4, colored( col_fire, aim_and_fire )} );
     }
     if( mode == TargetMode::Fire || mode == TargetMode::TurretManual ) {
-        lines.push_back( {5, colored( col_enabled, string_format( _( "[%s] to switch firing modes." ),
-                                      bound_key( "SWITCH_MODE" ).short_description() ) )} );
-        lines.push_back( {6, colored( col_enabled, string_format( _( "[%s] to reload/switch ammo." ),
-                                      bound_key( "SWITCH_AMMO" ).short_description() ) )} );
+        lines.push_back( {5, colored( col_enabled, string_format( _( "[%c] to switch firing modes." ),
+                                      bound_key( "SWITCH_MODE" ) ) )} );
+        lines.push_back( {6, colored( col_enabled, string_format( _( "[%c] to reload/switch ammo." ),
+                                      bound_key( "SWITCH_AMMO" ) ) )} );
     }
     if( mode == TargetMode::Turrets ) {
-        const std::string label = draw_turret_lines
-                                  ? _( "[%s] Hide lines of fire" )
-                                  : _( "[%s] Show lines of fire" );
-        lines.push_back( {1, colored( col_enabled, string_format( label, bound_key( "TOGGLE_TURRET_LINES" ).short_description() ) )} );
+        const std::string label = to_translation( "[Hotkey] Show/Hide turrets' lines of fire",
+                                  "[%c] %s lines of fire" ).translated();
+        const std::string showhide = draw_turret_lines ? "Hide" : "Show";
+        lines.push_back( {1, colored( col_enabled, string_format( label, bound_key( "TOGGLE_TURRET_LINES" ), showhide ) )} );
     }
 
     // Shrink the list until it fits

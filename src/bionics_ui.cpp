@@ -2,7 +2,6 @@
 #include <cstddef>
 #include <memory>
 
-#include "avatar.h"
 #include "bionics.h"
 #include "bodypart.h"
 #include "cata_utility.h"
@@ -30,7 +29,7 @@
 static const std::string flag_PERPETUAL( "PERPETUAL" );
 
 // '!', '-' and '=' are uses as default bindings in the menu
-static const invlet_wrapper
+const invlet_wrapper
 bionic_chars( "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\"#&()*+./:;@[\\]^_{|}" );
 
 namespace
@@ -160,7 +159,7 @@ std::string enum_to_string<bionic_ui_sort_mode>( bionic_ui_sort_mode mode )
 }
 } // namespace io
 
-bionic *avatar::bionic_by_invlet( const int ch )
+bionic *player::bionic_by_invlet( const int ch )
 {
     // space is a special case for unassigned
     if( ch == ' ' ) {
@@ -175,21 +174,17 @@ bionic *avatar::bionic_by_invlet( const int ch )
     return nullptr;
 }
 
-char get_free_invlet( Character &p )
+char get_free_invlet( player &p )
 {
-    if( p.is_npc() ) {
-        // npcs don't need an invlet
-        return ' ';
-    }
     for( const char &inv_char : bionic_chars ) {
-        if( p.as_avatar()->bionic_by_invlet( inv_char ) == nullptr ) {
+        if( p.bionic_by_invlet( inv_char ) == nullptr ) {
             return inv_char;
         }
     }
     return ' ';
 }
 
-static void draw_bionics_titlebar( const catacurses::window &window, avatar *p,
+static void draw_bionics_titlebar( const catacurses::window &window, player *p,
                                    bionic_menu_mode mode )
 {
     input_context ctxt( "BIONICS", keyboard_mode::keychar );
@@ -539,7 +534,7 @@ static nc_color get_bionic_text_color( const bionic &bio, const bool isHighlight
     return type;
 }
 
-void avatar::power_bionics()
+void player::power_bionics()
 {
     sorted_bionics passive = filtered_bionics( *my_bionics, TAB_PASSIVE );
     sorted_bionics active = filtered_bionics( *my_bionics, TAB_ACTIVE );

@@ -24,8 +24,7 @@ then
     # Also build chkjson (even though we're not using it), to catch any
     # compile errors there
     make -j "$num_jobs" chkjson
-# Skip the rest of the run if this change is pure json and this job doesn't test any extra mods
-elif [ -n "$JUST_JSON" -a -z "$MODS" ]
+elif [ -n "$JUST_JSON" ]
 then
     echo "Early exit on just-json change"
     exit 0

@@ -466,7 +466,7 @@ std::string direction_name_impl( const direction dir, const bool short_name )
         return result;
     }();
 
-    int i = static_cast<int>( dir );
+    auto i = static_cast<int>( dir );
     if( i < 0 || i >= size ) {
         i = size;
     }

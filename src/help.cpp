@@ -85,13 +85,11 @@ std::string help::get_dir_grid()
                            " / | \\     / | \\\n"
                            "<LEFTDOWN_0>  <DOWN_0>  <RIGHTDOWN_0>   <LEFTDOWN_1>  <DOWN_1>  <RIGHTDOWN_1>";
 
-    for( action_id dir : movearray ) {
-        std::vector<input_event> keys = keys_bound_to( dir, /*maximum_modifier_count=*/0 );
+    for( auto dir : movearray ) {
+        std::vector<char> keys = keys_bound_to( dir );
         for( size_t i = 0; i < 2; i++ ) {
             movement = string_replace( movement, "<" + action_ident( dir ) + string_format( "_%d>", i ),
-                                       i < keys.size()
-                                       ? string_format( "<color_light_blue>%s</color>",
-                                               keys[i].short_description() )
+                                       i < keys.size() ? string_format( "<color_light_blue>%s</color>", keys[i] )
                                        : "<color_red>?</color>" );
         }
     }

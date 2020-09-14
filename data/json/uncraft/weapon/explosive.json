@@ -1,7 +1,6 @@
 [
   {
     "type": "uncraft",
-    "activity_level": "fake",
     "result": "grenade",
     "skill_used": "fabrication",
     "difficulty": 3,
@@ -11,7 +10,6 @@
   },
   {
     "type": "uncraft",
-    "activity_level": "fake",
     "result": "grenade_inc",
     "skill_used": "fabrication",
     "difficulty": 3,
@@ -21,7 +19,6 @@
   },
   {
     "type": "uncraft",
-    "activity_level": "fake",
     "result": "landmine",
     "skill_used": "fabrication",
     "difficulty": 4,

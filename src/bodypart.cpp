@@ -14,6 +14,8 @@
 #include "json.h"
 #include "type_id.h"
 
+static const anatomy_id anatomy_human_anatomy( "human_anatomy" );
+
 side opposite_side( side s )
 {
     switch( s ) {
@@ -211,9 +213,6 @@ void body_part_type::load( const JsonObject &jo, const std::string & )
         connected_to = main_part;
     }
     mandatory( jo, was_loaded, "opposite_part", opposite_part );
-
-    optional( jo, was_loaded, "smash_message", smash_message );
-    optional( jo, was_loaded, "smash_efficiency", smash_efficiency, 0.5f );
 
     optional( jo, was_loaded, "hot_morale_mod", hot_morale_mod, 0.0 );
     optional( jo, was_loaded, "cold_morale_mod", cold_morale_mod, 0.0 );

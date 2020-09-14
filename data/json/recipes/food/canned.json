@@ -2,7 +2,6 @@
   {
     "result": "offal_canned",
     "type": "recipe",
-    "activity_level": "fake",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
     "category": "CC_FOOD",
@@ -21,7 +20,6 @@
   {
     "result": "offal_canned",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_MEAT",
     "skill_used": "cooking",
@@ -47,7 +45,6 @@
   {
     "result": "offal_pickled",
     "type": "recipe",
-    "activity_level": "fake",
     "id_suffix": "jarred",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_MEAT",
@@ -69,7 +66,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "dogfood",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -92,7 +88,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "dogfood",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -120,7 +115,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "dogfood",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -144,7 +138,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "catfood",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -167,7 +160,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "catfood",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -194,7 +186,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "catfood",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -217,7 +208,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "V8",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -243,7 +233,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_mushroom",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -264,7 +253,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_mushroom",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -287,7 +275,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_mushroom",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -308,7 +295,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "meat_canned",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -327,7 +313,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "fish_canned",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -346,7 +331,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "veggy_canned",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -369,7 +353,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "apple_canned",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -393,7 +376,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_woods",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -414,7 +396,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_meat",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -435,7 +416,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_veggy",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -456,7 +436,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_fish",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -477,7 +456,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "broth",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -498,7 +476,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "broth_bone",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -518,7 +495,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "kompot",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -543,7 +519,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "jam_fruit",
     "category": "CC_FOOD",
     "id_suffix": "jarred",
@@ -567,7 +542,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "jam_fruit",
     "category": "CC_FOOD",
     "id_suffix": "jarred_3L",
@@ -591,7 +565,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "can_tomato",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -614,7 +587,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "can_beans",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -637,7 +609,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "meat_canned",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_MEAT",
@@ -663,7 +634,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "fish_canned",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_MEAT",
@@ -689,7 +659,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "veggy_canned",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",
@@ -715,7 +684,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "apple_canned",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",
@@ -743,7 +711,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "can_tomato",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",
@@ -770,7 +737,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "can_beans",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",
@@ -796,7 +762,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_woods",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -819,7 +784,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_veggy",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -842,7 +806,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_meat",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -865,7 +828,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_fish",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -888,7 +850,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "meat_canned",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -907,7 +868,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "veggy_canned",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -930,7 +890,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "apple_canned",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -955,7 +914,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "fish_canned",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -975,7 +933,6 @@
   {
     "result": "offal_canned",
     "type": "recipe",
-    "activity_level": "fake",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
     "category": "CC_FOOD",
@@ -993,7 +950,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "can_tomato",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1016,7 +972,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "can_beans",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1039,7 +994,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_woods",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1060,7 +1014,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_meat",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1081,7 +1034,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_veggy",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1102,7 +1054,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "soup_fish",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1123,7 +1074,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "broth",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1144,7 +1094,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "broth_bone",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1164,7 +1113,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "sauce_red",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1187,7 +1135,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "sauce_red",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -1210,7 +1157,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "sauce_red",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -1237,7 +1183,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "kompot",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -1261,7 +1206,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "con_milk",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ] ],
@@ -1292,7 +1236,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "con_milk",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ] ],
@@ -1318,7 +1261,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "con_milk",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -1352,7 +1294,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "broth",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -1375,7 +1316,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "broth_bone",
     "id_suffix": "canned",
     "category": "CC_FOOD",
@@ -1402,7 +1342,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "apple_cider",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ], [ "juice_pulp", 4 ] ],
@@ -1426,7 +1365,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "apple_cider",
     "id_suffix": "canned",
     "byproducts": [ [ "juice_pulp", 4 ] ],
@@ -1446,7 +1384,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "apple_cider",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ], [ "juice_pulp", 24 ] ],
@@ -1470,7 +1407,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "oj",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ], [ "juice_pulp", 4 ] ],
@@ -1494,7 +1430,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "oj",
     "id_suffix": "canned",
     "byproducts": [ [ "juice_pulp", 4 ] ],
@@ -1514,7 +1449,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "oj",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ], [ "juice_pulp", 24 ] ],
@@ -1538,7 +1472,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "cranberry_juice",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ], [ "juice_pulp", 4 ] ],
@@ -1562,7 +1495,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "cranberry_juice",
     "id_suffix": "canned",
     "byproducts": [ [ "juice_pulp", 4 ] ],
@@ -1582,7 +1514,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "cranberry_juice",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ], [ "juice_pulp", 24 ] ],
@@ -1606,7 +1537,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "juice",
     "id_suffix": "jarred",
     "byproducts": [ [ "water", 10 ], [ "juice_pulp", 2 ] ],
@@ -1626,7 +1556,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "juice",
     "id_suffix": "canned",
     "byproducts": [ [ "juice_pulp", 2 ] ],
@@ -1645,7 +1574,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "juice",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water", 10 ], [ "juice_pulp", 12 ] ],

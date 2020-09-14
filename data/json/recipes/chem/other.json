@@ -2,7 +2,6 @@
   {
     "result": "bone_glue",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_OTHER",
     "skill_used": "survival",
@@ -19,7 +18,6 @@
   {
     "result": "superglue",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_OTHER",
     "skill_used": "chemistry",
@@ -46,7 +44,6 @@
   {
     "result": "rosin",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_OTHER",
     "skill_used": "chemistry",

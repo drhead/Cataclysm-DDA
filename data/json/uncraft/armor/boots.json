@@ -2,7 +2,6 @@
   {
     "result": "roller_blades",
     "type": "uncraft",
-    "activity_level": "BRISK_EXERCISE",
     "skill_used": "fabrication",
     "difficulty": 2,
     "time": "10 m",
@@ -12,7 +11,6 @@
   {
     "result": "rollerskates",
     "type": "uncraft",
-    "activity_level": "BRISK_EXERCISE",
     "skill_used": "fabrication",
     "difficulty": 2,
     "time": "10 m",

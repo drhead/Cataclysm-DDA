@@ -2,7 +2,6 @@
   {
     "result": "oxyacetylene",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_OTHER",
     "skill_used": "chemistry",
@@ -16,7 +15,6 @@
   {
     "result": "acetylene",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_OTHER",
     "skill_used": "chemistry",
@@ -30,7 +28,6 @@
   {
     "result": "tinyweldtank",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_OTHER",
     "skill_used": "fabrication",
@@ -43,7 +40,6 @@
   {
     "result": "weldtank",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_OTHER",
     "skill_used": "fabrication",

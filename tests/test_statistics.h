@@ -163,7 +163,7 @@ class statistics
             double average = avg();
             double sigma_acc = 0;
 
-            for( const T v : samples ) {
+            for( const auto v : samples ) {
                 const double diff = v - average;
                 sigma_acc += diff * diff;
             }

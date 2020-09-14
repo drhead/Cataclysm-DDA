@@ -15,11 +15,10 @@
 // Smaller test on libstdc++ debug containers because otherwise this takes ~1 minute.
 constexpr int MAX_COORDINATE = 30;
 #else
-static constexpr int MAX_COORDINATE = 300;
+constexpr int MAX_COORDINATE = 300;
 #endif
-static constexpr int NUM_ENTRIES_2D = ( ( MAX_COORDINATE * 2 ) + 1 ) * ( (
-        MAX_COORDINATE * 2 ) + 1 );
-static constexpr int NUM_ENTRIES_3D = NUM_ENTRIES_2D * ( 21 );
+constexpr int NUM_ENTRIES_2D = ( ( MAX_COORDINATE * 2 ) + 1 ) * ( ( MAX_COORDINATE * 2 ) + 1 );
+constexpr int NUM_ENTRIES_3D = NUM_ENTRIES_2D * ( 21 );
 
 static size_t count_unique_elements( std::vector<size_t> &found_elements )
 {

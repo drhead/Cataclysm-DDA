@@ -2,7 +2,6 @@
   {
     "result": "mre_accessory",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "3 s",
     "components": [
       [ [ "pur_tablets", 6 ] ],
@@ -20,7 +19,6 @@
   {
     "result": "mre_dessert",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "3 s",
     "components": [ [ [ "dry_fruit", 1 ] ], [ [ "chocolate", 1 ] ], [ [ "candy2", 1 ] ], [ [ "cookies", 1 ] ], [ [ "bag_plastic", 1 ] ] ],
     "flags": [ "BLIND_EASY" ]
@@ -28,7 +26,6 @@
   {
     "result": "mre_chilibeans_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_chilibeans", 1 ] ],
@@ -44,7 +41,6 @@
   {
     "result": "mre_bbqbeef_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_bbqbeef", 1 ] ],
@@ -60,7 +56,6 @@
   {
     "result": "mre_chickennoodle_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_chickennoodle", 1 ] ],
@@ -76,7 +71,6 @@
   {
     "result": "mre_spaghetti_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_spaghetti", 1 ] ],
@@ -92,7 +86,6 @@
   {
     "result": "mre_chicken_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_chicken", 1 ] ],
@@ -108,7 +101,6 @@
   {
     "result": "mre_beeftaco_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_beeftaco", 1 ] ],
@@ -124,7 +116,6 @@
   {
     "result": "mre_beef_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_beef", 1 ] ],
@@ -140,7 +131,6 @@
   {
     "result": "mre_meatball_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_meatball", 1 ] ],
@@ -156,7 +146,6 @@
   {
     "result": "mre_beefstew_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_beefstew", 1 ] ],
@@ -172,7 +161,6 @@
   {
     "result": "mre_chilimac_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_chilimac", 1 ] ],
@@ -188,7 +176,6 @@
   {
     "result": "mre_veggy_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_veggy", 1 ] ],
@@ -204,7 +191,6 @@
   {
     "result": "mre_macaronimarinara_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_macaronimarinara", 1 ] ],
@@ -220,7 +206,6 @@
   {
     "result": "mre_sfettuccine_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_sfettuccine", 1 ] ],
@@ -236,7 +221,6 @@
   {
     "result": "mre_ratatouille_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_ratatouille", 1 ] ],
@@ -252,7 +236,6 @@
   {
     "result": "mre_cheesetort_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_cheesetort", 1 ] ],
@@ -268,7 +251,6 @@
   {
     "result": "mre_mushroomfettuccine_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_mushroomfettuccine", 1 ] ],
@@ -284,7 +266,6 @@
   {
     "result": "mre_mexicanchickenstew_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_mexicanchickenstew", 1 ] ],
@@ -300,7 +281,6 @@
   {
     "result": "mre_chickenburritobowl_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_chickenburritobowl", 1 ] ],
@@ -316,7 +296,6 @@
   {
     "result": "mre_maplesausage_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_maplesausage", 1 ] ],
@@ -332,7 +311,6 @@
   {
     "result": "mre_ravioli_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_ravioli", 1 ] ],
@@ -348,7 +326,6 @@
   {
     "result": "mre_pepperjackbeef_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_pepperjackbeef", 1 ] ],
@@ -364,7 +341,6 @@
   {
     "result": "mre_hashbrownbacon_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_hashbrownbacon", 1 ] ],
@@ -380,7 +356,6 @@
   {
     "result": "mre_lemontuna_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_lemontuna", 1 ] ],
@@ -396,7 +371,6 @@
   {
     "result": "mre_asianbeef_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_asianbeef", 1 ] ],
@@ -412,7 +386,6 @@
   {
     "result": "mre_chickenpesto_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_chickenpesto", 1 ] ],
@@ -428,7 +401,6 @@
   {
     "result": "mre_southwestbeef_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_southwestbeef", 1 ] ],
@@ -444,7 +416,6 @@
   {
     "result": "mre_hotdog_box",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "mre_hotdog", 1 ] ],
@@ -461,7 +432,6 @@
     "//": "Until 0.F, allow disassembling legacy toolboxes",
     "result": "toolbox",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "components": [
       [ [ "toolbox_empty", 1 ] ],

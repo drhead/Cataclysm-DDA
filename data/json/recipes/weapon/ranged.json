@@ -1,7 +1,6 @@
 [
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "chemical_thrower",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -21,7 +20,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "staff_sling",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -35,7 +33,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "rifle_223",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -50,7 +47,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "rifle_38",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -65,7 +61,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "rifle_40",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -80,7 +75,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "rifle_44",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -95,7 +89,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "rifle_45",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -110,7 +103,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "rifle_flintlock",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -133,7 +125,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "longrifle_flintlock",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -156,7 +147,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "carbine_flintlock",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -179,7 +169,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "pistol_flintlock",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -203,7 +192,6 @@
   {
     "result": "carbine_flintlock_double",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "skill_used": "fabrication",
@@ -219,7 +207,6 @@
   {
     "result": "carbine_flintlock_double",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "id_suffix": "from_antiques",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -234,7 +221,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "speargun",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -248,7 +234,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "doublespeargun",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -262,7 +247,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "minispeargun",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -276,7 +260,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -321,7 +304,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun",
     "id_suffix": "without_welding",
     "category": "CC_WEAPON",
@@ -365,7 +347,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun_d",
     "id_suffix": "with_tape",
     "category": "CC_WEAPON",
@@ -378,7 +359,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun_d",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -423,7 +403,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun_d",
     "id_suffix": "welded_together",
     "category": "CC_WEAPON",
@@ -469,7 +448,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "slamfire_shotgun_d",
     "id_suffix": "bolted_and_welded",
     "category": "CC_WEAPON",

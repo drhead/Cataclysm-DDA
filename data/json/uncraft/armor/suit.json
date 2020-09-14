@@ -2,7 +2,6 @@
   {
     "result": "xlhsurvivor_suit",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "tailor",
     "difficulty": 3,
     "time": "10 m",
@@ -12,7 +11,6 @@
   {
     "result": "xlsurvivor_suit",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "tailor",
     "difficulty": 3,
     "time": "5 m",

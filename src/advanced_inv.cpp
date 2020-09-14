@@ -15,7 +15,6 @@
 #include "advanced_inv_pagination.h"
 #include "auto_pickup.h"
 #include "avatar.h"
-#include "cached_options.h"
 #include "calendar.h"
 #include "cata_assert.h"
 #include "catacharset.h"
@@ -517,7 +516,9 @@ struct advanced_inv_sorter {
                             return false;
                         }
                     }
-                    return localized_compare( a1, a2 );
+                    return std::lexicographical_compare( a1.begin(), a1.end(),
+                                                         a2.begin(), a2.end(),
+                                                         sort_case_insensitive_less() );
                 }
             }
             break;
@@ -544,7 +545,8 @@ struct advanced_inv_sorter {
             n1 = &d1.name_without_prefix;
             n2 = &d2.name_without_prefix;
         }
-        return localized_compare( *n1, *n2 );
+        return std::lexicographical_compare( n1->begin(), n1->end(),
+                                             n2->begin(), n2->end(), sort_case_insensitive_less() );
     }
 };
 

@@ -1,92 +1,56 @@
 [
   {
-    "name": "i_light_gray",
+    "name": "i_ltgray",
     "custom": "",
-    "invertcustom": "c_white"
+    "invertcustom": "c_white",
+    "nobrightcustom": ""
   },
   {
     "name": "c_pink",
     "custom": "",
-    "invertcustom": "i_magenta"
+    "invertcustom": "i_magenta",
+    "nobrightcustom": ""
   },
   {
-    "name": "c_light_red",
+    "name": "c_ltred",
     "custom": "",
-    "invertcustom": "i_red"
+    "invertcustom": "i_red",
+    "nobrightcustom": ""
   },
   {
-    "name": "c_light_cyan",
+    "name": "c_ltcyan",
     "custom": "",
-    "invertcustom": "i_cyan"
+    "invertcustom": "i_cyan",
+    "nobrightcustom": ""
   },
   {
     "name": "c_white",
     "custom": "",
-    "invertcustom": "i_light_gray"
+    "invertcustom": "i_ltgray",
+    "nobrightcustom": ""
   },
   {
-    "name": "c_light_blue",
+    "name": "c_ltblue",
     "custom": "",
-    "invertcustom": "i_blue"
+    "invertcustom": "i_blue",
+    "nobrightcustom": ""
   },
   {
     "name": "c_yellow",
     "custom": "",
-    "invertcustom": "i_brown"
+    "invertcustom": "i_brown",
+    "nobrightcustom": ""
   },
   {
-    "name": "c_dark_gray",
+    "name": "c_dkgray",
     "custom": "",
-    "invertcustom": "i_light_gray"
+    "invertcustom": "i_ltgray",
+    "nobrightcustom": ""
   },
   {
-    "name": "c_light_green",
+    "name": "c_ltgreen",
     "custom": "",
-    "invertcustom": "i_green"
-  },
-  {
-    "name": "i_white",
-    "custom": "i_light_gray",
-    "invertcustom": ""
-  },
-  {
-    "name": "i_dark_gray",
-    "custom": "i_light_gray",
-    "invertcustom": ""
-  },
-  {
-    "name": "i_light_red",
-    "custom": "i_red",
-    "invertcustom": ""
-  },
-  {
-    "name": "i_light_green",
-    "custom": "i_green",
-    "invertcustom": ""
-  },
-  {
-    "name": "i_light_blue",
-    "custom": "i_blue",
-    "invertcustom": ""
-  },
-  {
-    "name": "i_light_cyan",
-    "custom": "i_cyan",
-    "invertcustom": ""
-  },
-  {
-    "name": "i_pink",
-    "custom": "i_magenta",
-    "invertcustom": ""
-  },
-  {
-    "name": "i_yellow",
-    "custom": "i_brown",
-    "invertcustom": ""
-  },
-  {
-    "name": "c_light_gray",
-    "custom": "c_white",
-    "invertcustom": ""
+    "invertcustom": "i_ltgreen",
+    "nobrightcustom": ""
   }
 ]

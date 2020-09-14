@@ -10,7 +10,7 @@ class JsonObject;
 
 struct SpeechBubble {
     translation text;
-    int volume = 0;
+    int volume;
 };
 
 void load_speech( const JsonObject &jo );

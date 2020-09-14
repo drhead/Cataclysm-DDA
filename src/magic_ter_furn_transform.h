@@ -21,7 +21,7 @@ class ter_furn_data
     private:
         weighted_int_list<T> list;
         std::string message;
-        bool message_good = false;
+        bool message_good;
     public:
         ter_furn_data() = default;
         ter_furn_data( const weighted_int_list<T> &list, const std::string &message,

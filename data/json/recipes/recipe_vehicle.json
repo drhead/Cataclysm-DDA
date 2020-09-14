@@ -2,7 +2,6 @@
   {
     "result": "steam_watts_small",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -29,7 +28,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "fuel_bunker",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -44,7 +42,6 @@
   {
     "result": "reins_tackle",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "tailor",
@@ -60,7 +57,6 @@
   {
     "result": "yoke_harness",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -78,7 +74,6 @@
   {
     "result": "hd_tow_cable",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -92,7 +87,6 @@
   {
     "result": "bike_rack",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -111,7 +105,6 @@
   {
     "result": "rebar_plate",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "//": "sawing it down doesn't teach anything useful",
@@ -127,7 +120,6 @@
   {
     "result": "spring_plate",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -141,7 +133,6 @@
   {
     "result": "tearer",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -161,7 +152,6 @@
   {
     "result": "minifreezer",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "mechanics",
@@ -192,7 +182,6 @@
   {
     "result": "programmable_autopilot",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "computer",
@@ -235,7 +224,6 @@
   {
     "result": "minifridge",
     "type": "recipe",
-    "activity_level": "fake",
     "copy-from": "minifreezer",
     "skills_required": [ "fabrication", 4 ],
     "qualities": [
@@ -258,7 +246,6 @@
   {
     "result": "mountable_heater",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
     "skill_used": "fabrication",
@@ -273,7 +260,6 @@
   {
     "result": "mountable_cooler",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
     "skill_used": "mechanics",
@@ -299,7 +285,6 @@
   {
     "result": "vh_autoclave",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
     "skill_used": "fabrication",
@@ -314,7 +299,6 @@
   {
     "result": "washing_machine",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
     "skill_used": "fabrication",
@@ -340,7 +324,6 @@
   {
     "result": "dishwasher",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
     "skill_used": "fabrication",
@@ -366,7 +349,6 @@
   {
     "result": "wheel_caster",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -381,7 +363,6 @@
   {
     "result": "mounted_spare_tire",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "mechanics",
@@ -397,7 +378,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "boat_board",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -411,7 +391,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "raft_board",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -424,7 +403,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "plastic_boat_hull",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -437,7 +415,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "sail",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -451,7 +428,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "hand_paddles",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -465,7 +441,6 @@
   {
     "result": "cargo_aisle",
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -479,7 +454,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "towel_hanger",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -492,7 +466,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "wheel_mount_wood",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -510,7 +483,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "wheel_mount_light",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -524,7 +496,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "turret_mount",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -544,7 +515,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "turret_controls",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
@@ -568,7 +538,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "basket",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -582,7 +551,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "folding_basket",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -596,7 +564,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "bike_basket",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -610,7 +577,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "foldframe",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -624,7 +590,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "foldwoodframe",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -638,7 +603,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "wheel_wheelchair",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -653,7 +617,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "wheel_rail_small_pair",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -668,7 +631,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "hand_rims",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -683,7 +645,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "frame",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -702,7 +663,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "hdframe",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -721,7 +681,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "frame_wood",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -735,7 +694,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "frame_wood_light",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -748,7 +706,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "wheel_wood",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -762,7 +719,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "wheel_wood_b",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -776,7 +732,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "wood_plate",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -790,7 +745,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
     "result": "wheel_metal",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -804,7 +758,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "steel_plate",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -820,7 +773,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "steel_armor",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
@@ -836,7 +788,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "spiked_plate",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -851,7 +802,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "hard_plate",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -868,7 +818,6 @@
   {
     "result": "fridgetank",
     "type": "recipe",
-    "activity_level": "fake",
     "copy-from": "minifreezer",
     "skills_required": [ "fabrication", 4 ],
     "qualities": [
@@ -890,7 +839,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "alternator_bicycle",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
@@ -907,7 +855,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "alternator_motorbike",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",

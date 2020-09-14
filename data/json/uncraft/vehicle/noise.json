@@ -1,7 +1,6 @@
 [
   {
     "type": "uncraft",
-    "activity_level": "BRISK_EXERCISE",
     "result": "muffler",
     "skill_used": "fabrication",
     "difficulty": 1,
@@ -11,7 +10,6 @@
   },
   {
     "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "beeper",
     "skill_used": "mechanics",
     "difficulty": 1,
@@ -21,7 +19,6 @@
   },
   {
     "type": "uncraft",
-    "activity_level": "fake",
     "result": "stereo",
     "skill_used": "mechanics",
     "difficulty": 2,
@@ -32,7 +29,6 @@
   },
   {
     "type": "uncraft",
-    "activity_level": "fake",
     "result": "chimes",
     "skill_used": "mechanics",
     "difficulty": 2,

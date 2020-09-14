@@ -1,7 +1,6 @@
 [
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "light_battery_cell",
     "category": "CC_ELECTRONIC",
     "subcategory": "CSC_ELECTRONIC_COMPONENTS",
@@ -20,7 +19,6 @@
   {
     "result": "mininuke",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
     "skill_used": "mechanics",
@@ -44,7 +42,6 @@
   {
     "result": "plut_cell",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_ELECTRONIC",
     "subcategory": "CSC_ELECTRONIC_COMPONENTS",
     "skill_used": "mechanics",
@@ -59,7 +56,6 @@
     "result": "light_battery_cell",
     "id_suffix": "afs_plutonium_battery",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_ELECTRONIC",
     "subcategory": "CSC_ELECTRONIC_COMPONENTS",
     "skill_used": "electronics",
@@ -75,7 +71,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "afs_murdersaw",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_CUTTING",
@@ -91,7 +86,6 @@
   {
     "result": "rolling_pin",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
     "skill_used": "fabrication",
@@ -106,7 +100,6 @@
   {
     "result": "afs_rolling_pin_barbed_wire",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
     "skill_used": "fabrication",
@@ -117,7 +110,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "afs_rope_lighter",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
@@ -136,7 +128,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "afs_survivor_belt",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_OTHER",
@@ -147,7 +138,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "survivor_belt",
     "id_suffix": "form_afs",
     "category": "CC_ARMOR",
@@ -159,7 +149,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "afs_basin",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
@@ -172,7 +161,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "thermometer",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
@@ -192,7 +180,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "afs_chain_wrench",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
@@ -208,7 +195,6 @@
   {
     "result": "afs_titanium_frame",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_PARTS",
     "skill_used": "fabrication",
@@ -220,24 +206,8 @@
     "components": [ [ [ "afs_scrap_titanium", 2 ] ] ]
   },
   {
-    "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
-    "result": "afs_titanium_foldable_frame",
-    "copy-from": "afs_titanium_frame",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_PARTS",
-    "skill_used": "fabrication",
-    "difficulty": 4,
-    "time": "60m",
-    "reversible": true,
-    "autolearn": true,
-    "using": [ [ "welding_standard", 6 ] ],
-    "components": [ [ [ "afs_scrap_titanium", 2 ], [ "afs_titanium_frame", 1 ] ] ]
-  },
-  {
     "result": "afs_metal_rig",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -254,7 +224,6 @@
   {
     "result": "afs_kitchen_rig",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "fabrication",
@@ -284,7 +253,6 @@
   {
     "result": "afs_cooking_rig",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_VEHICLE",
     "skill_used": "electronics",
@@ -307,7 +275,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "afs_atomic_smartphone",
     "category": "CC_ELECTRONIC",
     "subcategory": "CSC_ELECTRONIC_TOOLS",
@@ -321,7 +288,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "purifier_smart_shot",
     "category": "CC_CHEM",
     "subcategory": "CSC_CHEM_MUTAGEN",
@@ -337,7 +303,6 @@
   {
     "result": "laser_rifle_cheap",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
     "skill_used": "electronics",
@@ -360,7 +325,6 @@
   {
     "result": "plut_cell",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_ELECTRONIC",
     "subcategory": "CSC_ELECTRONIC_COMPONENTS",
     "skill_used": "electronics",
@@ -381,7 +345,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "reloaded_laser_pack",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_OTHER",
@@ -397,7 +360,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "unbio_blaster_gun",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",
@@ -418,7 +380,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "bot_tankbot",
     "category": "CC_ELECTRONIC",
     "subcategory": "CSC_ELECTRONIC_OTHER",
@@ -457,7 +418,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "bot_tripod",
     "category": "CC_ELECTRONIC",
     "subcategory": "CSC_ELECTRONIC_OTHER",
@@ -492,7 +452,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "bot_chickenbot",
     "category": "CC_ELECTRONIC",
     "subcategory": "CSC_ELECTRONIC_OTHER",
@@ -532,7 +491,6 @@
   {
     "result": "afs_scrap_titanium",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
     "skill_used": "fabrication",
@@ -548,7 +506,6 @@
   {
     "result": "afs_material_1",
     "type": "recipe",
-    "activity_level": "fake",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
     "skill_used": "fabrication",
@@ -563,7 +520,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "control_laptop",
     "category": "CC_ELECTRONIC",
     "subcategory": "CSC_ELECTRONIC_TOOLS",
@@ -579,7 +535,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "fake",
     "result": "afs_rebar_rifle",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_RANGED",

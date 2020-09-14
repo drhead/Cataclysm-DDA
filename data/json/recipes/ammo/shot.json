@@ -2,7 +2,6 @@
   {
     "result": "reloaded_shot_00",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -20,7 +19,6 @@
   {
     "result": "reloaded_410shot_000",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -38,7 +36,6 @@
   {
     "result": "reloaded_shot_bird",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -56,7 +53,6 @@
   {
     "result": "reloaded_shot_dragon",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -73,7 +69,6 @@
   {
     "result": "reloaded_shot_flechette",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -91,7 +86,6 @@
   {
     "result": "reloaded_shot_slug",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -108,7 +102,6 @@
   {
     "result": "bp_shot_00",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -125,7 +118,6 @@
   {
     "result": "bp_shot_bird",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -143,7 +135,6 @@
   {
     "result": "bp_shot_dragon",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -161,7 +152,6 @@
   {
     "result": "bp_shot_flechette",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -179,7 +169,6 @@
   {
     "result": "bp_shot_slug",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -197,7 +186,6 @@
     "result": "bp_shot_00",
     "id_suffix": "with dowel",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "copy-from": "bp_shot_00",
     "book_learn": [ [ "survival_book", 1 ], [ "mag_survival", 1 ] ],
     "time": "40 s",
@@ -208,7 +196,6 @@
     "result": "bp_shot_bird",
     "id_suffix": "with dowel",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "copy-from": "bp_shot_bird",
     "book_learn": [ [ "survival_book", 1 ], [ "mag_survival", 1 ] ],
     "time": "40 s",
@@ -219,7 +206,6 @@
     "result": "bp_shot_dragon",
     "id_suffix": "with dowel",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "copy-from": "bp_shot_dragon",
     "book_learn": [ [ "survival_book", 1 ], [ "mag_survival", 1 ] ],
     "time": "40 s",
@@ -230,7 +216,6 @@
     "result": "bp_shot_slug",
     "id_suffix": "with dowel",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "copy-from": "bp_shot_slug",
     "book_learn": [ [ "survival_book", 1 ], [ "mag_survival", 1 ] ],
     "time": "40 s",
@@ -245,7 +230,6 @@
   {
     "result": "shot_scrap",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -278,7 +262,6 @@
   {
     "result": "bp_shot_scrap",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -312,7 +295,6 @@
     "result": "bp_shot_scrap",
     "id_suffix": "with dowel",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "copy-from": "bp_shot_scrap",
     "book_learn": [ [ "survival_book", 1 ], [ "mag_survival", 1 ] ],
     "time": 4000,
@@ -337,7 +319,6 @@
   {
     "result": "signal_flare",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -354,7 +335,6 @@
   {
     "result": "shot_paper_00",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -372,7 +352,6 @@
   {
     "result": "shot_paper_slug",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -390,7 +369,6 @@
   {
     "result": "shot_paper_dragon",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",
@@ -413,7 +391,6 @@
   {
     "result": "shot_paper_bird",
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "category": "CC_AMMO",
     "subcategory": "CSC_AMMO_SHOT",
     "skill_used": "fabrication",

@@ -5,7 +5,6 @@
 #include <memory>
 #include <vector>
 
-#include "cached_options.h"
 #include "cursesdef.h"
 #include "game.h"
 #include "game_ui.h"

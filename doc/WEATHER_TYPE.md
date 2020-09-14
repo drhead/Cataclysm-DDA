@@ -115,7 +115,7 @@ Things that weather can cause to happen.
 | `effect_id`                    | Optional: String id of an effect to add.                              |
 | `effect_duration`              | Optional: How long the above effect will be added for, defaults to 1 second. |
 | `target_part`                  | Optional: Bodypart that above effect or damage are applied to, if blank affects whole body. |
-| `damage`                       | Optional: List of damage instances applied                            |
+| `damage`                       | Optional: Hp bashing damage applied.                                  |
 | `spawns`                       | Optional: Array of spawns to cause.  If spawns are selected but are unable to spawn the effect is cancelled. |
 | `fields`                       | Optional: Array of fields to cause.  Elements are discussed below     |
       
@@ -131,15 +131,7 @@ Things that weather can cause to happen.
       "add_effect":"bite",
       "effect_duration":"10 minutes",
       "target_part": "arm_l",
-      "damage":[
-        {
-          "damage_type": "electric",
-          "amount": 4.0,
-          "armor_penetration": 1,
-          "armor_multiplier": 1.2,
-          "damage_multiplier": 1.4
-        }
-      ],
+      "damage":5,
       "spawns":
       [{
         "max_radius":10,

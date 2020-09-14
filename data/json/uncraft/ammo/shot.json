@@ -2,7 +2,6 @@
   {
     "result": "shot_00",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "gun",
     "difficulty": 5,
     "time": "1 s",
@@ -13,7 +12,6 @@
   {
     "result": "shot_beanbag",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "gun",
     "difficulty": 5,
     "time": "1 s",
@@ -24,7 +22,6 @@
   {
     "result": "shot_bird",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "gun",
     "difficulty": 5,
     "time": "1 s",
@@ -35,7 +32,6 @@
   {
     "result": "shot_dragon",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "gun",
     "difficulty": 5,
     "time": "1 s",
@@ -46,7 +42,6 @@
   {
     "result": "shot_flechette",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "gun",
     "difficulty": 5,
     "time": "1 s",
@@ -56,7 +51,6 @@
   },
   {
     "type": "uncraft",
-    "activity_level": "fake",
     "result": "shot_he",
     "skill_used": "gun",
     "difficulty": 5,
@@ -69,7 +63,6 @@
   {
     "result": "shot_slug",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "gun",
     "difficulty": 5,
     "time": "1 s",

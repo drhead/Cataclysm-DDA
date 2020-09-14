@@ -1,7 +1,6 @@
 [
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_shelter_1_0",
     "description": "We should survey the base site and set up a bulletin board.",
     "category": "CC_BUILDING",
@@ -26,7 +25,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_fireplace",
     "description": "We should build a fireplace for cooking and grab a pot.  Let's set up near the working terminal.",
     "category": "CC_BUILDING",
@@ -58,7 +56,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_brazier",
     "description": "We should build a brazier for cooking and grab a pot.  Let's set up near the working terminal.",
     "category": "CC_BUILDING",
@@ -92,7 +89,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_stove",
     "description": "We should build a wood stove for cooking and grab a pot.  Let's set up near the working terminal.",
     "category": "CC_BUILDING",
@@ -131,7 +127,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_well",
     "description": "We should build a well, put it near the terminal.  This will make our future here more secure.",
     "category": "CC_BUILDING",
@@ -155,7 +150,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_bed_standard_NW",
     "description": "Let's furnish the southeast bedroom with a regular bed.",
     "category": "CC_BUILDING",
@@ -186,7 +180,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_standard_W1",
     "description": "Let's furnish the west bedroom with regular beds.",
     "category": "CC_BUILDING",
@@ -217,7 +210,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_standard_W2",
     "description": "Let's furnish the west bedroom with regular beds.",
     "category": "CC_BUILDING",
@@ -248,7 +240,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_standard_W3",
     "description": "Let's furnish the west bedroom with regular beds.",
     "category": "CC_BUILDING",
@@ -279,7 +270,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_bed_straw_NW",
     "description": "Let's furnish the southeast bedroom with a straw bed.",
     "category": "CC_BUILDING",
@@ -309,7 +299,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_straw_W1",
     "description": "Let's furnish the west bedroom with a straw bed.",
     "category": "CC_BUILDING",
@@ -339,7 +328,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_straw_W2",
     "description": "Let's furnish the west bedroom with a straw bed.",
     "category": "CC_BUILDING",
@@ -369,7 +357,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_straw_W3",
     "description": "Let's furnish the west bedroom with straw beds.",
     "category": "CC_BUILDING",
@@ -399,7 +386,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_bed_makeshift_NW",
     "description": "Let's furnish the southeast bedroom with a makeshift bed.",
     "category": "CC_BUILDING",
@@ -430,7 +416,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_makeshift_W1",
     "description": "Let's furnish the west bedroom with a makeshift bed.",
     "category": "CC_BUILDING",
@@ -461,7 +446,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_makeshift_W2",
     "description": "Let's furnish the west bedroom with a makeshift bed.",
     "category": "CC_BUILDING",
@@ -492,7 +476,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_makeshift_W3",
     "description": "Let's furnish the west bedroom with makeshift beds.",
     "category": "CC_BUILDING",
@@ -523,7 +506,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_bed_standard_SW",
     "description": "Let's furnish the southwest bedroom with a regular bed.",
     "category": "CC_BUILDING",
@@ -555,7 +537,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_bed_straw_SW",
     "description": "Let's furnish the southwest bedroom with a straw bed.",
     "category": "CC_BUILDING",
@@ -587,7 +568,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_bed_makeshift_SW",
     "description": "Let's furnish the southwest bedroom with a makeshift bed.",
     "category": "CC_BUILDING",
@@ -619,7 +599,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_standard_S1",
     "description": "Let's furnish the southern bedroom with regular beds.",
     "category": "CC_BUILDING",
@@ -651,7 +630,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_straw_S1",
     "description": "Let's furnish the southern bedroom with straw beds.",
     "category": "CC_BUILDING",
@@ -683,7 +661,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_makeshift_S1",
     "description": "Let's furnish the southern bedroom with makeshift beds.",
     "category": "CC_BUILDING",
@@ -715,7 +692,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_standard_S2",
     "description": "Let's furnish the southern bedroom with regular beds.",
     "category": "CC_BUILDING",
@@ -746,7 +722,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_straw_S2",
     "description": "Let's furnish the southern bedroom with straw beds.",
     "category": "CC_BUILDING",
@@ -776,7 +751,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_beds_makeshift_S2",
     "description": "Let's furnish the southern bedroom with makeshift beds.",
     "category": "CC_BUILDING",
@@ -807,7 +781,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_diningroom",
     "description": "Let's make a dining area.",
     "category": "CC_BUILDING",
@@ -831,7 +804,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_livingroom",
     "description": "Let's make a living room area.",
     "category": "CC_BUILDING",
@@ -860,7 +832,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_pantry",
     "description": "Let's build some pantry storage.",
     "category": "CC_BUILDING",
@@ -884,7 +855,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_craftspot",
     "description": "Let's build a work bench.",
     "category": "CC_BUILDING",
@@ -908,7 +878,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_shelter_1_radio",
     "description": "Let's set up a radio tower to improve our recruitment efforts.",
     "category": "CC_BUILDING",

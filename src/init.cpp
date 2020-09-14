@@ -191,6 +191,8 @@ void DynamicDataLoader::add( const std::string &type,
     }
 }
 
+void load_charge_removal_blacklist( const JsonObject &jo, const std::string &src );
+
 void DynamicDataLoader::initialize()
 {
     // all of the applicable types that can be loaded, along with their loading functions
@@ -408,7 +410,7 @@ void DynamicDataLoader::initialize()
     add( "mod_tileset", &load_mod_tileset );
 #else
     // Dummy function
-    add( "mod_tileset", load_ignored_type );
+    add( "mod_tileset", []( const JsonObject &, const std::string & ) { } );
 #endif
 }
 

@@ -10,7 +10,7 @@
 #include "generic_factory.h"
 #include "json.h"
 
-static std::vector<move_mode_id> move_modes_sorted;
+std::vector<move_mode_id> move_modes_sorted;
 
 const std::vector<move_mode_id> &move_modes_by_speed()
 {
@@ -26,12 +26,6 @@ template<>
 const move_mode &move_mode_id::obj() const
 {
     return move_mode_factory.obj( *this );
-}
-
-template<>
-bool move_mode_id::is_valid() const
-{
-    return move_mode_factory.is_valid( *this );
 }
 
 static const std::map<std::string, move_mode_type> move_types {

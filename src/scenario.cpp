@@ -35,7 +35,7 @@ bool string_id<scenario>::is_valid() const
     return all_scenarios.is_valid( *this );
 }
 
-static scen_blacklist sc_blacklist;
+scen_blacklist sc_blacklist;
 
 scenario::scenario()
     : id( "" ), _name_male( no_translation( "null" ) ),

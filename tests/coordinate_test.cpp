@@ -8,7 +8,7 @@
 #include "coordinates.h"
 #include "point.h"
 
-static constexpr int num_trials = 5;
+constexpr int num_trials = 5;
 
 static_assert( point::dimension == 2, "" );
 static_assert( tripoint::dimension == 3, "" );

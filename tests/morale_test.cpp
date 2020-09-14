@@ -7,22 +7,17 @@
 #include "calendar.h"
 #include "type_id.h"
 
-static const efftype_id effect_cold( "cold" );
-static const efftype_id effect_hot( "hot" );
-static const efftype_id effect_took_prozac( "took_prozac" );
-
-TEST_CASE( "player_morale_empty", "[player_morale]" )
+TEST_CASE( "player_morale" )
 {
+    static const efftype_id effect_cold( "cold" );
+    static const efftype_id effect_hot( "hot" );
+    static const efftype_id effect_took_prozac( "took_prozac" );
+
     player_morale m;
 
     GIVEN( "an empty morale" ) {
         CHECK( m.get_level() == 0 );
     }
-}
-
-TEST_CASE( "player_morale_decay", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "temporary morale (food)" ) {
         m.add( MORALE_FOOD_GOOD, 20, 40, 20_turns, 10_turns );
@@ -93,11 +88,6 @@ TEST_CASE( "player_morale_decay", "[player_morale]" )
             CHECK( m.get_level() == 0 );
         }
     }
-}
-
-TEST_CASE( "player_morale_persistent", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "persistent morale" ) {
         m.set_permanent( MORALE_PERM_MASOCHIST, 5 );
@@ -112,11 +102,6 @@ TEST_CASE( "player_morale_persistent", "[player_morale]" )
             }
         }
     }
-}
-
-TEST_CASE( "player_morale_optimist", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "OPTIMISTIC trait" ) {
         m.on_mutation_gain( trait_id( "OPTIMISTIC" ) );
@@ -129,11 +114,6 @@ TEST_CASE( "player_morale_optimist", "[player_morale]" )
             CHECK( m.get_level() == 0 );
         }
     }
-}
-
-TEST_CASE( "player_morale_bad_temper", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "BADTEMPER trait" ) {
         m.on_mutation_gain( trait_id( "BADTEMPER" ) );
@@ -146,11 +126,6 @@ TEST_CASE( "player_morale_bad_temper", "[player_morale]" )
             CHECK( m.get_level() == 0 );
         }
     }
-}
-
-TEST_CASE( "player_morale_killed_innocent", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "killed an innocent" ) {
         m.add( MORALE_KILLED_INNOCENT, -100 );
@@ -171,11 +146,6 @@ TEST_CASE( "player_morale_killed_innocent", "[player_morale]" )
             }
         }
     }
-}
-
-TEST_CASE( "player_morale_fancy_clothes", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "a set of super fancy bride's clothes" ) {
         const item dress_wedding( "dress_wedding", 0 ); // legs, torso | 8 + 2 | 10
@@ -230,11 +200,6 @@ TEST_CASE( "player_morale_fancy_clothes", "[player_morale]" )
             }
         }
     }
-}
-
-TEST_CASE( "player_morale_masochist", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "masochist trait" ) {
         m.on_mutation_gain( trait_id( "MASOCHIST" ) );
@@ -312,11 +277,6 @@ TEST_CASE( "player_morale_masochist", "[player_morale]" )
                     20 : 0 ) == -40 );
         }
     }
-}
-
-TEST_CASE( "player_morale_cenobite", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "cenobite trait" ) {
         m.on_mutation_gain( trait_id( "CENOBITE" ) );
@@ -338,11 +298,6 @@ TEST_CASE( "player_morale_cenobite", "[player_morale]" )
             }
         }
     }
-}
-
-TEST_CASE( "player_morale_plant", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "a humanoid plant" ) {
         m.on_mutation_gain( trait_id( "PLANT" ) );
@@ -393,11 +348,6 @@ TEST_CASE( "player_morale_plant", "[player_morale]" )
             }
         }
     }
-}
-
-TEST_CASE( "player_morale_tough_temperature", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "tough temperature conditions" ) {
         WHEN( "chilly" ) {
@@ -574,11 +524,6 @@ TEST_CASE( "player_morale_tough_temperature", "[player_morale]" )
             }
         }
     }
-}
-
-TEST_CASE( "player_morale_stacking", "[player_morale]" )
-{
-    player_morale m;
 
     GIVEN( "stacking of bonuses" ) {
         m.add( MORALE_FOOD_GOOD, 10, 40, 20_turns, 10_turns );

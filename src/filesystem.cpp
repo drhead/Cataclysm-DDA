@@ -133,6 +133,14 @@ std::string read_entire_file( const std::string &path )
 
 namespace
 {
+
+// TODO: move elsewhere.
+template <typename T, size_t N>
+inline size_t sizeof_array( T const( & )[N] ) noexcept
+{
+    return N;
+}
+
 //--------------------------------------------------------------------------------------------------
 // For non-empty path, call function for each file at path.
 //--------------------------------------------------------------------------------------------------
@@ -162,9 +170,9 @@ void for_each_dir_entry( const std::string &path, Function function )
 #if !defined(_WIN32)
 std::string resolve_path( const std::string &full_path )
 {
-    char *const result_str = realpath( full_path.c_str(), nullptr );
+    const auto result_str = realpath( full_path.c_str(), nullptr );
     if( !result_str ) {
-        char *const e_str = strerror( errno );
+        const auto e_str = strerror( errno );
         DebugLog( D_WARNING, D_MAIN ) << "realpath [" << full_path << "] failed with \"" << e_str << "\".";
         return {};
     }
@@ -282,8 +290,8 @@ std::vector<std::string> find_file_if_bfs( const std::string &root_path,
         const auto path = std::move( directories.front() );
         directories.pop_front();
 
-        const std::ptrdiff_t n_dirs    = static_cast<std::ptrdiff_t>( directories.size() );
-        const std::ptrdiff_t n_results = static_cast<std::ptrdiff_t>( results.size() );
+        const auto n_dirs    = static_cast<std::ptrdiff_t>( directories.size() );
+        const auto n_results = static_cast<std::ptrdiff_t>( results.size() );
 
         for_each_dir_entry( path, [&]( const dirent & entry ) {
             // exclude special directories.
@@ -299,7 +307,7 @@ std::vector<std::string> find_file_if_bfs( const std::string &root_path,
             }
 
             // add sub directories to recursive_search if requested
-            const bool is_dir = is_directory( entry, full_path );
+            const auto is_dir = is_directory( entry, full_path );
             if( recursive_search && is_dir ) {
                 directories.emplace_back( full_path );
             }

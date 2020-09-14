@@ -40,10 +40,7 @@ struct four_quadrants {
         return values[static_cast<int>( q )];
     }
     void fill( float v ) {
-        values[0] = v;
-        values[1] = v;
-        values[2] = v;
-        values[3] = v;
+        std::fill( values.begin(), values.end(), v );
     }
     float max() const {
         return *std::max_element( values.begin(), values.end() );

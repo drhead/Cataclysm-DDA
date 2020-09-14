@@ -1161,12 +1161,12 @@
     ],
     "decay_amount_factor": 15,
     "gas_absorption_factor": 5,
-    "percent_spread": 30,
-    "outdoor_age_speedup": "1 minutes",
+    "percent_spread": 55,
+    "outdoor_age_speedup": "5 minutes",
     "dirty_transparency_cache": true,
     "has_fume": true,
     "priority": 8,
-    "half_life": "7 minutes",
+    "half_life": "50 minutes",
     "phase": "gas",
     "display_items": false,
     "display_field": true,
@@ -1209,7 +1209,8 @@
     "outdoor_age_speedup": "100 minutes",
     "priority": -1,
     "half_life": "50 minutes",
-    "phase": "gas"
+    "phase": "gas",
+    "display_field": true
   },
   {
     "id": "fd_cold_air2",
@@ -1225,7 +1226,8 @@
     "outdoor_age_speedup": "100 minutes",
     "priority": -1,
     "half_life": "50 minutes",
-    "phase": "gas"
+    "phase": "gas",
+    "display_field": true
   },
   {
     "id": "fd_cold_air3",
@@ -1241,7 +1243,8 @@
     "outdoor_age_speedup": "100 minutes",
     "priority": -1,
     "half_life": "50 minutes",
-    "phase": "gas"
+    "phase": "gas",
+    "display_field": true
   },
   {
     "id": "fd_cold_air4",
@@ -1257,7 +1260,8 @@
     "outdoor_age_speedup": "100 minutes",
     "priority": -1,
     "half_life": "50 minutes",
-    "phase": "gas"
+    "phase": "gas",
+    "display_field": true
   },
   {
     "id": "fd_hot_air1",
@@ -1273,7 +1277,8 @@
     "outdoor_age_speedup": "100 minutes",
     "priority": -1,
     "half_life": "50 minutes",
-    "phase": "gas"
+    "phase": "gas",
+    "display_field": true
   },
   {
     "id": "fd_hot_air2",
@@ -1289,7 +1294,8 @@
     "outdoor_age_speedup": "100 minutes",
     "priority": -1,
     "half_life": "50 minutes",
-    "phase": "gas"
+    "phase": "gas",
+    "display_field": true
   },
   {
     "id": "fd_hot_air3",
@@ -1305,7 +1311,8 @@
     "outdoor_age_speedup": "100 minutes",
     "priority": -1,
     "half_life": "50 minutes",
-    "phase": "gas"
+    "phase": "gas",
+    "display_field": true
   },
   {
     "id": "fd_hot_air4",
@@ -1321,7 +1328,8 @@
     "outdoor_age_speedup": "100 minutes",
     "priority": -1,
     "half_life": "50 minutes",
-    "phase": "gas"
+    "phase": "gas",
+    "display_field": true
   },
   {
     "id": "fd_hot_air_sauna",

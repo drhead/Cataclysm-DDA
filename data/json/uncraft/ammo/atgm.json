@@ -2,7 +2,6 @@
   {
     "result": "atgm_heat",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "fabrication",
     "difficulty": 6,
     "time": "1 h",

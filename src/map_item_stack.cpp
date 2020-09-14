@@ -45,15 +45,12 @@ void map_item_stack::add_at_pos( const item *const it, const tripoint &pos )
 
 bool map_item_stack::map_item_stack_sort( const map_item_stack &lhs, const map_item_stack &rhs )
 {
-    const item_category &lhs_cat = lhs.example->get_category_of_contents();
-    const item_category &rhs_cat = rhs.example->get_category_of_contents();
-
-    if( lhs_cat == rhs_cat ) {
+    if( lhs.example->get_category() == rhs.example->get_category() ) {
         return square_dist( tripoint_zero, lhs.vIG[0].pos ) <
                square_dist( tripoint_zero, rhs.vIG[0].pos );
     }
 
-    return lhs_cat < rhs_cat;
+    return lhs.example->get_category() < rhs.example->get_category();
 }
 
 std::vector<map_item_stack> filter_item_stacks( const std::vector<map_item_stack> &stack,

@@ -51,7 +51,6 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
-#include <functional>
 
 #define STRING2(x) #x
 #define STRING(x) STRING2(x)
@@ -197,13 +196,6 @@ void limitDebugClass( int );
  * @return true if any error has been logged in this run.
  */
 bool debug_has_error_been_observed();
-
-/**
- * Capturing debug messages during func execution,
- * used to test debugmsg calls in the unit tests
- * @return std::string debugmsg
- */
-std::string capture_debugmsg_during( const std::function<void()> &func );
 
 // Debug Only                                                       {{{1
 // ---------------------------------------------------------------------

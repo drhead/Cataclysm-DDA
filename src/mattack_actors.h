@@ -25,16 +25,16 @@ class monster;
 class leap_actor : public mattack_actor
 {
     public:
-        float max_range = 0.0f;
+        float max_range;
         // Jump has to be at least this tiles long
-        float min_range = 0.0f;
+        float min_range;
         // Don't leap without a hostile target creature
-        bool allow_no_target = false;
-        int move_cost = 0;
+        bool allow_no_target;
+        int move_cost;
         // Range below which we don't consider jumping at all
-        float min_consider_range = 0.0f;
+        float min_consider_range;
         // Don't jump if distance to target is more than this
-        float max_consider_range = 0.0f;
+        float max_consider_range;
 
         leap_actor() = default;
         ~leap_actor() override = default;
@@ -48,9 +48,9 @@ class mon_spellcasting_actor : public mattack_actor
 {
     public:
         // is the spell beneficial to target itself?
-        bool self = false;
+        bool self;
         spell spell_data;
-        int move_cost = 0;
+        int move_cost;
 
         mon_spellcasting_actor() = default;
         ~mon_spellcasting_actor() override = default;

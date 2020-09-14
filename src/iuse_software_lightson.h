@@ -19,7 +19,7 @@ class lightson_game
         std::vector<point> change_coords;
         // row, column
         point position;
-        bool win = false;
+        bool win;
 
         void new_level();
         void reset_level();

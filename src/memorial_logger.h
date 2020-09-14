@@ -19,6 +19,7 @@ class event;
 class JsonIn;
 class JsonOut;
 
+
 class memorial_log_entry
 {
     public:

@@ -2,7 +2,6 @@
   {
     "result": "40x46mm_m1006",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "fabrication",
     "difficulty": 4,
     "time": "3 m",
@@ -18,7 +17,6 @@
   {
     "result": "40x46mm_m433",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "fabrication",
     "difficulty": 4,
     "time": "3 m",
@@ -35,7 +33,6 @@
   {
     "result": "40x46mm_m576",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "fabrication",
     "difficulty": 4,
     "time": "3 m",
@@ -52,7 +49,6 @@
   {
     "result": "40x46mm_m651",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "fabrication",
     "difficulty": 4,
     "time": "3 m",

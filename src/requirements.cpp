@@ -325,17 +325,6 @@ requirement_data requirement_data::operator+( const requirement_data &rhs ) cons
     return res;
 }
 
-requirement_data requirement_data::operator+(
-    const std::pair<const requirement_id, int> &rhs ) const
-{
-    return *this + *rhs.first * rhs.second;
-}
-
-requirement_data requirement_data::operator+( const std::pair<requirement_id, int> &rhs ) const
-{
-    return *this + *rhs.first * rhs.second;
-}
-
 void requirement_data::load_requirement( const JsonObject &jsobj, const requirement_id &id )
 {
     requirement_data req;
@@ -357,7 +346,7 @@ void requirement_data::load_requirement( const JsonObject &jsobj, const requirem
 
 void requirement_data::save_requirement( const requirement_data &req, const requirement_id &id )
 {
-    requirement_data dup = req;
+    auto dup = req;
     if( !id.is_null() ) {
         dup.id_ = id;
     }
@@ -412,19 +401,17 @@ template<typename T>
 std::string requirement_data::print_missing_objs( const std::string &header,
         const std::vector< std::vector<T> > &objs )
 {
-    std::string separator_and = _( "and " );
-    std::string separator_or = _( " or " );
     std::string buffer;
     for( const auto &list : objs ) {
         if( any_marked_available( list ) ) {
             continue;
         }
         if( !buffer.empty() ) {
-            buffer += std::string( "\n" ) + separator_and;
+            buffer += std::string( "\n" ) + _( "and " );
         }
         for( auto it = list.begin(); it != list.end(); ++it ) {
             if( it != list.begin() ) {
-                buffer += separator_or;
+                buffer += _( " or " );
             }
             buffer += it->to_string();
         }

@@ -15,7 +15,6 @@
 #include "avatar_action.h"
 #include "bionics.h"
 #include "bodypart.h"
-#include "cached_options.h"
 #include "calendar.h"
 #include "catacharset.h"
 #include "character.h"
@@ -27,7 +26,6 @@
 #include "damage.h"
 #include "debug.h"
 #include "debug_menu.h"
-#include "event_bus.h"
 #include "faction.h"
 #include "field.h"
 #include "field_type.h"
@@ -103,6 +101,7 @@ static const efftype_id effect_incorporeal( "incorporeal" );
 static const efftype_id effect_laserlocked( "laserlocked" );
 static const efftype_id effect_relax_gas( "relax_gas" );
 
+static const itype_id itype_radio_car_on( "radio_car_on" );
 static const itype_id itype_radiocontrol( "radiocontrol" );
 static const itype_id itype_shoulder_strap( "shoulder_strap" );
 
@@ -226,7 +225,7 @@ input_context game::get_player_input( std::string &action )
         }
 
         //x% of the Viewport, only shown on visible areas
-        const weather_animation_t weather_info = weather.weather_id->weather_animation;
+        const auto weather_info = weather.weather_id->weather_animation;
         point offset( u.view_offset.xy() + point( -getmaxx( w_terrain ) / 2 + u.posx(),
                       -getmaxy( w_terrain ) / 2 + u.posy() ) );
 
@@ -242,12 +241,12 @@ input_context game::get_player_input( std::string &action )
 #endif //TILES
 
         // TODO: Move the weather calculations out of here.
-        const bool bWeatherEffect = weather_info.symbol != NULL_UNICODE;
+        const bool bWeatherEffect = ( weather_info.glyph != '?' );
         const int dropCount = static_cast<int>( iEnd.x * iEnd.y * weather_info.factor );
 
         weather_printable wPrint;
         wPrint.colGlyph = weather_info.color;
-        wPrint.cGlyph = weather_info.symbol;
+        wPrint.cGlyph = weather_info.glyph;
         wPrint.wtype = weather.weather_id;
         wPrint.vdrops.clear();
 
@@ -687,7 +686,7 @@ static void smash()
                      mon->type->melee_sides;
         mech_smash = true;
     } else {
-        smashskill = player_character.str_cur + player_character.weapon.damage_melee( damage_type::BASH );
+        smashskill = player_character.str_cur + player_character.weapon.damage_melee( DT_BASH );
     }
 
     const bool allow_floor_bash = debug_mode; // Should later become "true"
@@ -707,8 +706,6 @@ static void smash()
         smashp.z = player_character.posz();
         smash_floor = true;
     }
-    get_event_bus().send<event_type::character_smashes_tile>(
-        player_character.getID(), here.ter( smashp ).id(), here.furn( smashp ).id() );
     if( player_character.is_mounted() ) {
         monster *crit = player_character.mounted_creature.get();
         if( crit->has_flag( MF_RIDEABLE_MECH ) ) {
@@ -760,45 +757,9 @@ static void smash()
         }
     }
 
-    if( !player_character.has_weapon() ) {
-        const bodypart_id bp_null( "bp_null" );
-        std::pair<bodypart_id, int> best_part_to_smash = {bp_null, 0};
-        int tmp_bash_armor = 0;
-        for( const bodypart_id &bp : player_character.get_all_body_parts() ) {
-            for( const item &i : player_character.worn ) {
-                if( i.covers( bp ) ) {
-                    tmp_bash_armor += i.bash_resist();
-                }
-            }
-            for( const trait_id &mut : player_character.get_mutations() ) {
-                for( const std::pair<const bodypart_str_id, resistances> &res : mut->armor ) {
-                    if( res.first == bp.id() ) {
-                        tmp_bash_armor += std::floor( res.second.type_resist( damage_type::BASH ) );
-                    }
-                }
-            }
-            if( tmp_bash_armor > best_part_to_smash.second ) {
-                best_part_to_smash = {bp, tmp_bash_armor};
-            }
-        }
-        if( best_part_to_smash.first != bp_null && here.is_bashable( smashp ) ) {
-            std::string name_to_bash = _( "thing" );
-            if( here.is_bashable_furn( smashp ) ) {
-                name_to_bash = here.furnname( smashp );
-            } else if( here.is_bashable_ter( smashp ) ) {
-                name_to_bash = here.tername( smashp );
-            }
-            if( !best_part_to_smash.first->smash_message.empty() ) {
-                add_msg( best_part_to_smash.first->smash_message, name_to_bash );
-            } else {
-                add_msg( _( "You use your %s to smash the %s." ),
-                         body_part_name_accusative( best_part_to_smash.first ), name_to_bash );
-            }
-        }
-        const int min_smashskill = smashskill * best_part_to_smash.first->smash_efficiency;
-        const int max_smashskill = smashskill * ( 1.0f + best_part_to_smash.first->smash_efficiency );
-        smashskill = std::min( best_part_to_smash.second + min_smashskill, max_smashskill );
-    }
+    const int bash_furn = here.furn( smashp )->bash.str_min;
+    const int bash_ter = here.ter( smashp )->bash.str_min;
+
     didit = here.bash( smashp, smashskill, false, false, smash_floor ).did_bash;
     if( didit ) {
         if( !mech_smash ) {
@@ -818,17 +779,40 @@ static void smash()
                 player_character.weapon.spill_contents( player_character.pos() );
                 sounds::sound( player_character.pos(), 24, sounds::sound_t::combat, "CRACK!", true, "smash",
                                "glass" );
-                player_character.deal_damage( nullptr, bodypart_id( "hand_r" ), damage_instance( damage_type::CUT,
-                                              rng( 0,
-                                                   vol ) ) );
+                player_character.deal_damage( nullptr, bodypart_id( "hand_r" ), damage_instance( DT_CUT, rng( 0,
+                                              vol ) ) );
                 if( vol > 20 ) {
                     // Hurt left arm too, if it was big
-                    player_character.deal_damage( nullptr, bodypart_id( "hand_l" ), damage_instance( damage_type::CUT,
-                                                  rng( 0,
-                                                       static_cast<int>( vol * .5 ) ) ) );
+                    player_character.deal_damage( nullptr, bodypart_id( "hand_l" ), damage_instance( DT_CUT, rng( 0,
+                                                  static_cast<int>( vol * .5 ) ) ) );
                 }
                 player_character.remove_weapon();
                 player_character.check_dead_state();
+            }
+
+            // It hurts if you smash things with your hands.
+            const bool hard_target = ( ( bash_furn > 2 ) || ( bash_furn == -1 && bash_ter > 2 ) );
+
+            int glove_coverage = 0;
+            for( const item &i : player_character.worn ) {
+                if( ( i.covers( bodypart_id( "hand_l" ) ) || i.covers( bodypart_id( "hand_r" ) ) ) ) {
+                    int l_coverage = i.get_coverage( bodypart_id( "hand_l" ) );
+                    int r_coverage = i.get_coverage( bodypart_id( "hand_r" ) );
+                    glove_coverage = std::max( l_coverage, r_coverage );
+                }
+            }
+
+            if( !player_character.has_weapon() && hard_target ) {
+                int dam = roll_remainder( 5.0 * ( 1 - glove_coverage / 100.0 ) );
+                if( player_character.get_part_hp_cur( bodypart_id( "arm_r" ) ) > player_character.get_part_hp_cur(
+                        bodypart_id( "arm_l" ) ) ) {
+                    player_character.deal_damage( nullptr, bodypart_id( "hand_r" ), damage_instance( DT_BASH, dam ) );
+                } else {
+                    player_character.deal_damage( nullptr, bodypart_id( "hand_l" ), damage_instance( DT_BASH, dam ) );
+                }
+                if( dam > 0 ) {
+                    add_msg( m_bad, _( "You hurt your hands trying to smash the %s." ), here.furnname( smashp ) );
+                }
             }
         }
         player_character.moves -= move_cost;
@@ -1416,8 +1400,7 @@ static void open_movement_mode_menu()
                                    curr->name() );
     }
     as_m.entries.emplace_back( cycle,
-                               player_character.can_switch_to( player_character.current_movement_mode()->cycle() ),
-                               hotkey_for_action( ACTION_OPEN_MOVEMENT, /*maximum_modifier_count=*/1 ),
+                               player_character.can_switch_to( player_character.current_movement_mode()->cycle() ), '"',
                                _( "Cycle move mode" ) );
     // This should select the middle move mode
     as_m.selected = std::floor( modes.size() / 2 );
@@ -1700,8 +1683,9 @@ bool game::handle_action()
         const input_event &&evt = ctxt.get_raw_input();
         if( !evt.sequence.empty() ) {
             const int ch = evt.get_first_input();
+            const std::string &&name = inp_mngr.get_keyname( ch, evt.type, true );
             if( !get_option<bool>( "NO_UNKNOWN_COMMAND_MSG" ) ) {
-                add_msg( m_info, _( "Unknown command: \"%s\" (%ld)" ), evt.long_description(), ch );
+                add_msg( m_info, _( "Unknown command: \"%s\" (%ld)" ), name, ch );
                 if( const cata::optional<std::string> hint =
                         press_x_if_bound( ACTION_KEYBINDINGS ) ) {
                     add_msg( m_info, _( "%s at any time to see and edit keybindings relevant to "
@@ -2561,13 +2545,6 @@ bool game::handle_action()
                     break;    //don't do anything when sharing and not debugger
                 }
                 display_radiation();
-                break;
-
-            case ACTION_DISPLAY_TRANSPARENCY:
-                if( MAP_SHARING::isCompetitive() && !MAP_SHARING::isDebugger() ) {
-                    break;    //don't do anything when sharing and not debugger
-                }
-                display_transparency();
                 break;
 
             case ACTION_TOGGLE_DEBUG_MODE:

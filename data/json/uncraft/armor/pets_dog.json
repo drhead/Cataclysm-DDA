@@ -2,7 +2,6 @@
   {
     "result": "acidchitin_harness_dog",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "fabrication",
     "difficulty": 2,
     "time": "30 s",
@@ -12,7 +11,6 @@
   {
     "result": "chitin_harness_dog",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "fabrication",
     "difficulty": 2,
     "time": "30 s",
@@ -22,7 +20,6 @@
   {
     "result": "chainmail_harness_dog",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "fabrication",
     "difficulty": 3,
     "time": "2 m",
@@ -32,7 +29,6 @@
   {
     "result": "leather_harness_dog",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "30 s",
@@ -42,7 +38,6 @@
   {
     "result": "leatherbone_harness_dog",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "30 s",
@@ -52,7 +47,6 @@
   {
     "result": "kevlar_harness",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "5 m",
@@ -62,7 +56,6 @@
   {
     "result": "rubber_harness_dog",
     "type": "uncraft",
-    "activity_level": "fake",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "rag", 5 ] ], [ [ "plastic_chunk", 5 ] ] ]
@@ -70,7 +63,6 @@
   {
     "result": "superalloy_harness_dog",
     "type": "uncraft",
-    "activity_level": "fake",
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "15 m",

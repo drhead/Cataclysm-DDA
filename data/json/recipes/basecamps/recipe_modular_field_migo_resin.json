@@ -1,7 +1,6 @@
 [
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_room0_migo_resin_northeast",
     "description": "We need some shelter, so build half of a mi-go resin shack with a sod roof on the northeast side of the camp",
     "category": "CC_BUILDING",
@@ -21,7 +20,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_room1_migo_resin_northeast",
     "description": "We should use mi-go resin to expand the shelter so we have space for another bed.",
     "category": "CC_BUILDING",
@@ -41,7 +39,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_room2_migo_resin_northeast",
     "description": "We should use mi-go resin to finish the northeast shack.",
     "category": "CC_BUILDING",
@@ -62,7 +59,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_shack4_migo_resin_east",
     "description": "We should expand our housing by putting up a mi-go resin building on the east side, which we can also use as part of the central building.",
     "category": "CC_BUILDING",
@@ -82,7 +78,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_room4_migo_resin_east",
     "description": "We should expand our housing by adding a mi-go resin room on the east side, which we can also use as part of the central building.",
     "category": "CC_BUILDING",
@@ -103,7 +98,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_shack4_migo_resin_southeast",
     "description": "We should expand our housing by putting up a mi-go resin building on the southeast side, which we can also use as part of the central building.",
     "category": "CC_BUILDING",
@@ -123,7 +117,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_room4_migo_resin_southeast",
     "description": "We should expand our housing by adding a mi-go resin room on the southeast side, which we can also use as part of the central building.",
     "category": "CC_BUILDING",
@@ -144,7 +137,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_room4_migo_resin_northwest",
     "description": "We should expand our housing by putting up a mi-go resin building on the northwest side, which we can also use as part of the central building.",
     "category": "CC_BUILDING",
@@ -164,7 +156,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_shack4_migo_resin_west",
     "description": "We should expand our housing by putting up a mi-go resin building on the west side, which we can also use as part of the central building.",
     "category": "CC_BUILDING",
@@ -184,7 +175,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_room4_migo_resin_west",
     "description": "We should expand our housing by adding a mi-go resin room on the west side, which we can also use as part of the central building.",
     "category": "CC_BUILDING",
@@ -204,7 +194,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_shack4_migo_resin_southwest",
     "description": "We should expand our housing by putting up a mi-go resin building on the southwest side, which we can also use as part of the central building.",
     "category": "CC_BUILDING",
@@ -224,7 +213,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_room4_migo_resin_southwest",
     "description": "We should expand our housing by adding a mi-go resin room on the southwest side, which we can also use as part of the central building.",
     "category": "CC_BUILDING",
@@ -244,7 +232,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_shack_ne_migo_resin_center",
     "description": "A central building can act as a kitchen and dining hall.  We should build the northeast quarter of one from mi-go resin.",
     "category": "CC_BUILDING",
@@ -264,7 +251,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_ne_migo_resin_center",
     "description": "A central building can act as a core and dining hall.  We should build out from the east room with mi-go resin.",
     "category": "CC_BUILDING",
@@ -284,7 +270,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_shack_nw_migo_resin_center",
     "description": "A central building can act as a core and dining hall.  We should build the northwest quarter of one from mi-go resin.",
     "category": "CC_BUILDING",
@@ -304,7 +289,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_nw_migo_resin_center",
     "description": "A central building can act as a core and dining hall.  We should build out from the west room with mi-go resin.",
     "category": "CC_BUILDING",
@@ -324,7 +308,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_migo_resin_center",
     "description": "A central building can act as a core and dining hall.  We should build between the east and west rooms with mi-go resin.",
     "category": "CC_BUILDING",
@@ -344,7 +327,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_shack_se_migo_resin_south",
     "description": "A central building can act as a core and dining hall.  We should build the southeast quarter of one from mi-go resin.",
     "category": "CC_BUILDING",
@@ -364,7 +346,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_se_migo_resin_south",
     "description": "A central building can act as a core and dining hall.  We should build out from the southeast room with mi-go resin.",
     "category": "CC_BUILDING",
@@ -385,7 +366,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_shack_sw_migo_resin_south",
     "description": "A central building can act as a core and dining hall.  We should build the southwest quarter of one from mi-go resin.",
     "category": "CC_BUILDING",
@@ -405,7 +385,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_sw_migo_resin_south",
     "description": "A central building can act as a core and dining hall.  We should build out from the southwest room with mi-go resin.",
     "category": "CC_BUILDING",
@@ -425,7 +404,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "faction_base_modular_hub_core_migo_resin_south",
     "description": "A central building can act as a core and dining hall.  We should build between the southeast and southwest rooms with mi-go resin.",
     "category": "CC_BUILDING",

@@ -349,7 +349,7 @@ void mission_start::find_safety( mission *miss )
     }
 }
 
-static const int RANCH_SIZE = 5;
+const int RANCH_SIZE = 5;
 
 void mission_start::ranch_nurse_1( mission *miss )
 {

@@ -1,8 +1,7 @@
-#include "cursesdef.h" // IWYU pragma: associated
-#include "sdltiles.h" // IWYU pragma: associated
-
 #include "cuboid_rectangle.h"
+#include "cursesdef.h" // IWYU pragma: associated
 #include "point.h"
+#include "sdltiles.h" // IWYU pragma: associated
 
 #if defined(TILES)
 
@@ -32,7 +31,6 @@
 #endif
 
 #include "avatar.h"
-#include "cached_options.h"
 #include "cata_assert.h"
 #include "cata_tiles.h"
 #include "cata_utility.h"
@@ -130,8 +128,8 @@ int fontwidth;          //the width of the font, background is always this size
 int fontheight;         //the height of the font, background is always this size
 static int TERMINAL_WIDTH;
 static int TERMINAL_HEIGHT;
-static bool fullscreen;
-static int scaling_factor;
+bool fullscreen;
+int scaling_factor;
 
 static SDL_Joystick *joystick; // Only one joystick for now.
 
@@ -438,7 +436,7 @@ static void WinDestroy()
 }
 
 /// Converts a color from colorscheme to SDL_Color.
-static inline const SDL_Color &color_as_sdl( const unsigned char color )
+inline const SDL_Color &color_as_sdl( const unsigned char color )
 {
     return windowsPalette[color];
 }
@@ -3089,7 +3087,7 @@ void input_manager::set_timeout( const int t )
 input_event input_manager::get_input_event( const keyboard_mode preferred_keyboard_mode )
 {
 #if !defined( __ANDROID__ )
-    if( actual_keyboard_mode( preferred_keyboard_mode ) == keyboard_mode::keychar ) {
+    if( preferred_keyboard_mode == keyboard_mode::keychar || !is_keycode_mode_supported() ) {
         SDL_StartTextInput();
     } else {
         SDL_StopTextInput();
